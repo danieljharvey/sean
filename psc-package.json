@@ -1,0 +1,14 @@
+{
+  "name": "sean",
+  "set": "psc-0.12.0",
+  "source": "https://github.com/purescript/package-sets.git",
+  "depends": [
+    "console",
+    "effect",
+    "prelude",
+    "psci-support",
+    "simple-json",
+    "node-fs-aff",
+    "test-unit"
+  ]
+}
