@@ -1,0 +1,12 @@
+{
+  "name": "sean",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/danieljharvey/sean",
+  "author": "Daniel J Harvey <dan.harvey@futurice.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "purescript-hedwig": "^0.1.0"
+  }
+}

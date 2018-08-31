@@ -2,16 +2,9 @@ module App.Story where
 
 import Prelude
 
-import Control.Apply (lift2)
-import Effect (Effect)
-import Effect.Aff (launchAff, Fiber)
-import Effect.Console (log)
-import Effect.Class (liftEffect)
-import Data.Array
+import Data.Array (find, head)
 import Data.Either (hush)
-import Data.Maybe (Maybe(..), isJust)
-import Node.Encoding (Encoding(..))
-import Node.FS.Aff (readTextFile)
+import Data.Maybe (Maybe, isJust)
 import Simple.JSON (readJSON)
 
 type Key = String
@@ -44,6 +37,9 @@ screens s = s.screens
 
 findScreen :: Key -> Story -> Maybe Screen
 findScreen k s = find (\scr -> scr.key == k) s.screens
+
+firstScreen :: Story -> Maybe Screen
+firstScreen s = head $ screens s
 
 key :: Screen -> Key
 key s = s.key
