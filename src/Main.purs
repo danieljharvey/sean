@@ -8,6 +8,7 @@ import App.View.Story (renderStory)
 import Effect (Effect)
 import Hedwig ((:>))
 import Hedwig as H
+import Control.Monad.Reader (runReader)
 
 init :: Model
 init = {
@@ -25,7 +26,7 @@ update model = case _ of
 view :: Model -> H.Html Msg
 view model = H.main [H.id "main"] [
   H.div [] [H.button [H.onClick Reset] [H.text "Start over!"]],
-  renderStory model.state.currentKey model.story
+  runReader (renderStory model.state.currentKey model.story) (model.story)
 ]
 
 main :: Effect Unit
