@@ -2,7 +2,7 @@ module Test.Main where
 
 import Prelude
 
-import App.Story (Story, findScreen, img, links, parseStory, screens, text, title, validateLink, updateKey, updateText)
+import App.Story (Story, findScreen, img, links, parseStory, screens, text, title, validateLink, updateKey, updateText, updateImg)
 import Data.Array (length, head)
 import Data.Maybe (Maybe(..), isJust)
 import Effect (Effect)
@@ -57,6 +57,19 @@ expectedTextChange = {
   ]
 }
 
+expectedImgChange :: Story
+expectedImgChange = {
+  title : "test",
+  screens: [
+    {
+      key : "test",
+      img : Just "image.jpg",
+      text : "test time",
+      links: []
+    }
+  ]
+}
+
 main :: Effect Unit
 main = runTest do
   suite "Parsing story" do
@@ -94,6 +107,10 @@ main = runTest do
         Assert.equal expectedKeyChange $ updateKey "test" "changed" testStory
       test "Change the text" do
         Assert.equal expectedTextChange $ updateText "test" "bing bong" testStory
+      test "Change the image" do
+        Assert.equal expectedImgChange $ updateImg "test" "image.jpg" testStory
+      test "Changing image to empty string makes Nothing" do
+        Assert.equal testStory $ updateImg "test" "" testStory
         
 
     

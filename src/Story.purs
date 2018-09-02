@@ -2,9 +2,10 @@ module App.Story where
 
 import Prelude
 
+import Data.String (length)
 import Data.Array (find, head)
 import Data.Either (hush)
-import Data.Maybe (Maybe, isJust)
+import Data.Maybe (Maybe(..), isJust)
 import Simple.JSON (readJSON)
 
 type Key = String
@@ -66,3 +67,12 @@ updateKey oldKey newKey story = story { screens = newScreens }
 updateText :: Key -> String -> Story -> Story
 updateText oldKey newText story = story { screens = newScreens }
     where newScreens = map (\scr -> if scr.key == oldKey then scr { text = newText } else scr) story.screens
+
+updateImg :: Key -> String -> Story -> Story
+updateImg oldKey newImg story = story { screens = newScreens }
+    where newScreens = map (\scr -> if scr.key == oldKey then (putImageInScreen newImg scr) else scr) story.screens
+
+putImageInScreen :: String -> Screen -> Screen
+putImageInScreen newImg scr = case (length newImg > 0) of
+    true -> scr { img = Just newImg }
+    false -> scr { img = Nothing }

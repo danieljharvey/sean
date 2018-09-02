@@ -20,6 +20,7 @@ renderScreen :: Screen -> Reader Story (H.Html Msg)
 renderScreen scr = do
     story <- ask
     pure $ H.div [H.id ("screen" <> scr.key), H.class' "story"] [
+        fromMaybe (H.div [] []) $ map (\img -> H.img [H.src img] []) scr.img,
         H.text scr.text,
         runReader (renderLinks scr.links) story
     ]

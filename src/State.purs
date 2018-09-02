@@ -22,3 +22,4 @@ data Msg = Reset
          | ChangeEditScreen Key
          | EditKey Key Key
          | EditText Key String
+         | EditImg Key String

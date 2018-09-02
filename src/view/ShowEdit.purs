@@ -52,7 +52,11 @@ screenForm scr = H.form [] [
     ],
     H.div [] [
         H.label [H.for "img"] [H.text "Image:"],
-        H.input [H.name "img", H.value $ fromMaybe "" scr.img] []
+        H.input [
+            H.name "img",
+            H.value $ fromMaybe "" scr.img,
+            H.onInput $ EditImg scr.key
+        ] []
     ],
     H.div [] [
         H.label [H.for "links"] [H.text "Links:"],

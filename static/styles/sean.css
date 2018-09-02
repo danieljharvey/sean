@@ -24,6 +24,10 @@ body {
   height: 100%;
 }
 
+.play img {
+  mix-blend-mode: multiply;
+}
+
 .sideBar {
   flex: 1;
   border-left: 1px #aaa solid;

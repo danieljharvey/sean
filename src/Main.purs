@@ -4,7 +4,7 @@ import Prelude
 
 import App.State (Model, Msg(..))
 import App.Story.Test (testStory)
-import App.Story (updateKey, updateText)
+import App.Story (updateKey, updateText, updateImg)
 import App.View.Story as Story
 import App.View.Edit as Edit
 import Data.Maybe (Maybe(..))
@@ -35,6 +35,9 @@ update model = case _ of
   }
   EditText oldKey newText -> model {
     story = updateText oldKey newText model.story
+  }
+  EditImg oldKey newImg -> model {
+    story = updateImg oldKey newImg model.story
   }
 
 view :: Model -> H.Html Msg
