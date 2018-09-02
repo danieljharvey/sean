@@ -7,16 +7,19 @@ import Control.Monad.Reader (Reader, ask, runReader)
 import Data.Maybe (fromMaybe)
 import Hedwig as H
 
-errorScreen :: Reader Story (H.Html Msg)
-errorScreen = pure $ H.div [] [H.text "Error - could not find screen"]
+view :: Key -> Story -> H.Html Msg
+view key story = runReader (renderStory key story) story
 
 renderStory :: Key -> Story -> Reader Story (H.Html Msg)
 renderStory key story = fromMaybe errorScreen $ map renderScreen (findScreen key story)
 
+errorScreen :: Reader Story (H.Html Msg)
+errorScreen = pure $ H.div [] [H.text "Error - could not find screen"]
+
 renderScreen :: Screen -> Reader Story (H.Html Msg)
 renderScreen scr = do
     story <- ask
-    pure $ H.main [H.id ("screen" <> scr.key)] [
+    pure $ H.div [H.id ("screen" <> scr.key), H.class' "story"] [
         H.text scr.text,
         runReader (renderLinks scr.links) story
     ]

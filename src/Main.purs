@@ -4,29 +4,35 @@ import Prelude
 
 import App.State (Model, Msg(..))
 import App.Story.Test (testStory)
-import App.View.Story (renderStory)
+import App.View.Story as Story
+import App.View.Edit as Edit
 import Effect (Effect)
 import Hedwig ((:>))
 import Hedwig as H
-import Control.Monad.Reader (runReader)
 
 init :: Model
 init = {
   story : testStory,
-  state : {
+  play : {
     currentKey : "start"
+  },
+  edit : {
+    editing : true
   }
 }
 
 update :: Model -> Msg -> Model
 update model = case _ of
   Reset -> init
-  ChangeScreen newKey -> model { state = model.state { currentKey = newKey } }
+  ChangeScreen newKey -> model { play = model.play { currentKey = newKey } }
 
 view :: Model -> H.Html Msg
 view model = H.main [H.id "main"] [
-  H.div [] [H.button [H.onClick Reset] [H.text "Start over!"]],
-  runReader (renderStory model.state.currentKey model.story) (model.story)
+  H.div [H.class' "play"] [
+    H.button [H.onClick Reset] [H.text "Start over!"],
+    Story.view model.play.currentKey model.story
+  ],
+  H.div [H.class' "edit"] [Edit.view model.edit model.story]
 ]
 
 main :: Effect Unit
