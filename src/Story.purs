@@ -58,3 +58,11 @@ validateLink s l = isJust $ findScreen l.key s
 
 weirdValid :: Maybe Story -> Maybe Link -> Maybe Boolean
 weirdValid ms ml = validateLink <$> ms <*> ml
+
+updateKey :: Key -> Key -> Story -> Story
+updateKey oldKey newKey story = story { screens = newScreens }
+    where newScreens = map (\scr -> if scr.key == oldKey then scr { key = newKey } else scr) story.screens
+
+updateText :: Key -> String -> Story -> Story
+updateText oldKey newText story = story { screens = newScreens }
+    where newScreens = map (\scr -> if scr.key == oldKey then scr { text = newText } else scr) story.screens

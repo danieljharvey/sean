@@ -2,8 +2,11 @@ module App.State where
 
 import App.Story (Story, Key)
 
+import Data.Maybe
+
 type EditSettings = {
-  editing :: Boolean
+  editing :: Boolean,
+  currentKey :: Maybe Key
 }
 
 type Model = {
@@ -14,4 +17,8 @@ type Model = {
   edit :: EditSettings
 }
 
-data Msg = Reset | ChangeScreen Key
+data Msg = Reset 
+         | ChangeScreen Key 
+         | ChangeEditScreen Key
+         | EditKey Key Key
+         | EditText Key String

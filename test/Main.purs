@@ -2,22 +2,60 @@ module Test.Main where
 
 import Prelude
 
-import Effect.Aff (Aff)
-import Effect (Effect)
-import App.Story (Story, findScreen, img, links, parseStory, screens, text, title, validateLink)
-import Data.Maybe (Maybe(..), isJust)
+import App.Story (Story, findScreen, img, links, parseStory, screens, text, title, validateLink, updateKey, updateText)
 import Data.Array (length, head)
-import Test.Unit (suite, test)
-import Test.Unit.Main (runTest)
-import Test.Unit.Assert as Assert
-
-import Node.FS.Aff as FS
+import Data.Maybe (Maybe(..), isJust)
+import Effect (Effect)
+import Effect.Aff (Aff)
 import Node.Encoding (Encoding(..))
+import Node.FS.Aff as FS
+import Test.Unit (suite, test)
+import Test.Unit.Assert as Assert
+import Test.Unit.Main (runTest)
 
 getTestStory :: Aff (Maybe Story)
 getTestStory = do
   fileContents <- FS.readTextFile UTF8 "./test/test.json"
   pure $ parseStory fileContents
+
+testStory :: Story
+testStory = {
+  title : "test",
+  screens: [
+    {
+      key : "test",
+      img : Nothing,
+      text : "test time",
+      links: []
+    }
+  ]
+}
+
+expectedKeyChange :: Story
+expectedKeyChange = {
+  title : "test",
+  screens: [
+    {
+      key : "changed",
+      img : Nothing,
+      text : "test time",
+      links: []
+    }
+  ]
+}
+
+expectedTextChange :: Story
+expectedTextChange = {
+  title : "test",
+  screens: [
+    {
+      key : "test",
+      img : Nothing,
+      text : "bing bong",
+      links: []
+    }
+  ]
+}
 
 main :: Effect Unit
 main = runTest do
@@ -51,5 +89,11 @@ main = runTest do
         let valid = validateLink <$> story <*> firstLink
         Assert.equal (Just false) valid
     
+    suite "Editing" do
+      test "Change a key" do
+        Assert.equal expectedKeyChange $ updateKey "test" "changed" testStory
+      test "Change the text" do
+        Assert.equal expectedTextChange $ updateText "test" "bing bong" testStory
+        
 
     
