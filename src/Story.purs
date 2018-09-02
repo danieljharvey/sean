@@ -2,10 +2,10 @@ module App.Story where
 
 import Prelude
 
-import Data.String (length)
-import Data.Array (find, head)
+import Data.Array (find, head, snoc, mapWithIndex)
 import Data.Either (hush)
 import Data.Maybe (Maybe(..), isJust)
+import Data.String (length)
 import Simple.JSON (readJSON)
 
 type Key = String
@@ -76,3 +76,24 @@ putImageInScreen :: String -> Screen -> Screen
 putImageInScreen newImg scr = case (length newImg > 0) of
     true -> scr { img = Just newImg }
     false -> scr { img = Nothing }
+
+addEmptyLink :: Key -> Story -> Story
+addEmptyLink oldKey story = story { screens = newScreens }
+    where newScreens = map (\scr -> if scr.key == oldKey then scr { links = addEmptyLinkToArray scr.links } else scr) story.screens
+
+addEmptyLinkToArray :: Array Link -> Array Link
+addEmptyLinkToArray linkArray = snoc linkArray { text: "", key: "" }
+
+updateLinkKey :: Key -> Int -> String -> Story -> Story
+updateLinkKey oldKey index newLink story = story { screens = newScreens }
+    where newScreens = map (\scr -> if scr.key == oldKey then scr { links = updateLinkByKey index newLink scr.links } else scr) story.screens
+
+updateLinkByKey :: Int -> String -> Array Link -> Array Link
+updateLinkByKey index newLink linkArray = mapWithIndex (\i -> \link -> if i == index then link { key = newLink } else link) linkArray
+
+updateLinkText:: Key -> Int -> String -> Story -> Story
+updateLinkText oldKey index newText story = story { screens = newScreens }
+    where newScreens = map (\scr -> if scr.key == oldKey then scr { links = updateLinkTextByKey index newText scr.links } else scr) story.screens
+
+updateLinkTextByKey :: Int -> String -> Array Link -> Array Link
+updateLinkTextByKey index newText linkArray = mapWithIndex (\i -> \link -> if i == index then link { text = newText } else link) linkArray

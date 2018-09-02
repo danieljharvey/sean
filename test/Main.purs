@@ -2,7 +2,7 @@ module Test.Main where
 
 import Prelude
 
-import App.Story (Story, findScreen, img, links, parseStory, screens, text, title, validateLink, updateKey, updateText, updateImg)
+import App.Story (Story, findScreen, img, links, parseStory, screens, text, title, validateLink, updateKey, updateText, updateImg, addEmptyLink, updateLinkKey, updateLinkText)
 import Data.Array (length, head)
 import Data.Maybe (Maybe(..), isJust)
 import Effect (Effect)
@@ -70,6 +70,56 @@ expectedImgChange = {
   ]
 }
 
+addEmptyLinkStory :: Story
+addEmptyLinkStory = {
+  title : "test",
+  screens: [
+    {
+      key : "test",
+      img : Nothing,
+      text : "test time",
+      links: [{
+        text: "", 
+        key: ""
+      }]
+    }
+  ]
+}
+
+
+changedLinkKeyStory :: Story
+changedLinkKeyStory = {
+  title : "test",
+  screens: [
+    {
+      key : "test",
+      img : Nothing,
+      text : "test time",
+      links: [{
+        text: "", 
+        key: "poo"
+      }]
+    }
+  ]
+}
+
+changedLinkTextStory :: Story
+changedLinkTextStory = {
+  title : "test",
+  screens: [
+    {
+      key : "test",
+      img : Nothing,
+      text : "test time",
+      links: [{
+        text: "yep", 
+        key: ""
+      }]
+    }
+  ]
+}
+
+
 main :: Effect Unit
 main = runTest do
   suite "Parsing story" do
@@ -111,6 +161,12 @@ main = runTest do
         Assert.equal expectedImgChange $ updateImg "test" "image.jpg" testStory
       test "Changing image to empty string makes Nothing" do
         Assert.equal testStory $ updateImg "test" "" testStory
+      test "Adding an empty link" do
+        Assert.equal addEmptyLinkStory $ addEmptyLink "test" testStory
+      test "Change a link's key" do
+        Assert.equal changedLinkKeyStory $ updateLinkKey "test" 0 "poo" addEmptyLinkStory
+      test "Change a link's text" do
+        Assert.equal changedLinkTextStory $ updateLinkText "test" 0 "yep" addEmptyLinkStory
         
 
     

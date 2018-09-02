@@ -23,3 +23,6 @@ data Msg = Reset
          | EditKey Key Key
          | EditText Key String
          | EditImg Key String
+         | EditAddLink Key
+         | EditLinkKey Key Int String
+         | EditLinkText Key Int String

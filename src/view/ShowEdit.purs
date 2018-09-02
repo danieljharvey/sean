@@ -2,9 +2,10 @@ module App.View.Edit where
 
 import Prelude
 
+import Data.Array (mapWithIndex)
 import App.Edit (getEditingScreen)
 import App.State (EditSettings, Msg(..))
-import App.Story (Story, Screen, Link)
+import App.Story (Story, Screen, Link, Key)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Hedwig as H
 
@@ -31,7 +32,7 @@ screen :: Screen -> H.Html Msg
 screen scr = H.div [H.onClick $ ChangeEditScreen scr.key] [H.text $ scr.key <> " - " <> scr.text]
 
 screenForm :: Screen -> H.Html Msg
-screenForm scr = H.form [] [
+screenForm scr = H.div [H.class' "form"] [
     H.div [] [
         H.label [H.for "key"] [H.text "Key:"],
         H.input [
@@ -60,9 +61,23 @@ screenForm scr = H.form [] [
     ],
     H.div [] [
         H.label [H.for "links"] [H.text "Links:"],
-        H.div [H.class' "links"] $ map screenLink scr.links
+        H.div [H.class' "links"] $ mapWithIndex (screenLink scr.key) scr.links,
+        H.button [H.onClick $ EditAddLink scr.key] [H.text "Add new link"]
     ]
 ]
 
-screenLink :: Link -> H.Html Msg
-screenLink link = H.div [H.class' "screenLink"] [H.text $ link.key <> " - " <> link.text]
+screenLink :: Key ->  Int ->  Link -> H.Html Msg
+screenLink key index link = H.div [H.class' "screenLink"] [
+    H.text "Link to:",
+    H.input [
+        H.type' "text",
+        H.value link.key,
+        H.onInput $ EditLinkKey key index 
+    ] [],
+        H.text "Text:",
+    H.input [
+        H.type' "text",
+        H.value link.text,
+        H.onInput $ EditLinkText key index 
+    ] []
+]

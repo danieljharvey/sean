@@ -1070,13 +1070,55 @@ var EditImg = (function () {
     };
     return EditImg;
 })();
+var EditAddLink = (function () {
+    function EditAddLink(value0) {
+        this.value0 = value0;
+    };
+    EditAddLink.create = function (value0) {
+        return new EditAddLink(value0);
+    };
+    return EditAddLink;
+})();
+var EditLinkKey = (function () {
+    function EditLinkKey(value0, value1, value2) {
+        this.value0 = value0;
+        this.value1 = value1;
+        this.value2 = value2;
+    };
+    EditLinkKey.create = function (value0) {
+        return function (value1) {
+            return function (value2) {
+                return new EditLinkKey(value0, value1, value2);
+            };
+        };
+    };
+    return EditLinkKey;
+})();
+var EditLinkText = (function () {
+    function EditLinkText(value0, value1, value2) {
+        this.value0 = value0;
+        this.value1 = value1;
+        this.value2 = value2;
+    };
+    EditLinkText.create = function (value0) {
+        return function (value1) {
+            return function (value2) {
+                return new EditLinkText(value0, value1, value2);
+            };
+        };
+    };
+    return EditLinkText;
+})();
 module.exports = {
     Reset: Reset,
     ChangeScreen: ChangeScreen,
     ChangeEditScreen: ChangeEditScreen,
     EditKey: EditKey,
     EditText: EditText,
-    EditImg: EditImg
+    EditImg: EditImg,
+    EditAddLink: EditAddLink,
+    EditLinkKey: EditLinkKey,
+    EditLinkText: EditLinkText
 };
 
 },{"../App.Story/index.js":15,"../Data.Maybe/index.js":121}],14:[function(require,module,exports){
@@ -1131,8 +1173,8 @@ var updateText = function (oldKey) {
     return function (newText) {
         return function (story) {
             var newScreens = Data_Functor.map(Data_Functor.functorArray)(function (scr) {
-                var $8 = scr.key === oldKey;
-                if ($8) {
+                var $16 = scr.key === oldKey;
+                if ($16) {
                     return {
                         text: newText,
                         key: scr.key,
@@ -1149,12 +1191,96 @@ var updateText = function (oldKey) {
         };
     };
 };
+var updateLinkTextByKey = function (index) {
+    return function (newText) {
+        return function (linkArray) {
+            return Data_Array.mapWithIndex(function (i) {
+                return function (link) {
+                    var $17 = i === index;
+                    if ($17) {
+                        return {
+                            text: newText,
+                            key: link.key
+                        };
+                    };
+                    return link;
+                };
+            })(linkArray);
+        };
+    };
+};
+var updateLinkText = function (oldKey) {
+    return function (index) {
+        return function (newText) {
+            return function (story) {
+                var newScreens = Data_Functor.map(Data_Functor.functorArray)(function (scr) {
+                    var $18 = scr.key === oldKey;
+                    if ($18) {
+                        return {
+                            links: updateLinkTextByKey(index)(newText)(scr.links),
+                            key: scr.key,
+                            img: scr.img,
+                            text: scr.text
+                        };
+                    };
+                    return scr;
+                })(story.screens);
+                return {
+                    title: story.title,
+                    screens: newScreens
+                };
+            };
+        };
+    };
+};
+var updateLinkByKey = function (index) {
+    return function (newLink) {
+        return function (linkArray) {
+            return Data_Array.mapWithIndex(function (i) {
+                return function (link) {
+                    var $19 = i === index;
+                    if ($19) {
+                        return {
+                            key: newLink,
+                            text: link.text
+                        };
+                    };
+                    return link;
+                };
+            })(linkArray);
+        };
+    };
+};
+var updateLinkKey = function (oldKey) {
+    return function (index) {
+        return function (newLink) {
+            return function (story) {
+                var newScreens = Data_Functor.map(Data_Functor.functorArray)(function (scr) {
+                    var $20 = scr.key === oldKey;
+                    if ($20) {
+                        return {
+                            links: updateLinkByKey(index)(newLink)(scr.links),
+                            key: scr.key,
+                            img: scr.img,
+                            text: scr.text
+                        };
+                    };
+                    return scr;
+                })(story.screens);
+                return {
+                    title: story.title,
+                    screens: newScreens
+                };
+            };
+        };
+    };
+};
 var updateKey = function (oldKey) {
     return function (newKey) {
         return function (story) {
             var newScreens = Data_Functor.map(Data_Functor.functorArray)(function (scr) {
-                var $9 = scr.key === oldKey;
-                if ($9) {
+                var $21 = scr.key === oldKey;
+                if ($21) {
                     return {
                         key: newKey,
                         img: scr.img,
@@ -1199,15 +1325,15 @@ var putImageInScreen = function (newImg) {
                 links: scr.links
             };
         };
-        throw new Error("Failed pattern match at App.Story line 76, column 31 - line 78, column 34: " + [ v.constructor.name ]);
+        throw new Error("Failed pattern match at App.Story line 76, column 31 - line 78, column 35: " + [ v.constructor.name ]);
     };
 };
 var updateImg = function (oldKey) {
     return function (newImg) {
         return function (story) {
             var newScreens = Data_Functor.map(Data_Functor.functorArray)(function (scr) {
-                var $11 = scr.key === oldKey;
-                if ($11) {
+                var $23 = scr.key === oldKey;
+                if ($23) {
                     return putImageInScreen(newImg)(scr);
                 };
                 return scr;
@@ -1267,6 +1393,32 @@ var weirdValid = function (ms) {
         return Control_Apply.apply(Data_Maybe.applyMaybe)(Data_Functor.map(Data_Maybe.functorMaybe)(validateLink)(ms))(ml);
     };
 };
+var addEmptyLinkToArray = function (linkArray) {
+    return Data_Array.snoc(linkArray)({
+        text: "",
+        key: ""
+    });
+};
+var addEmptyLink = function (oldKey) {
+    return function (story) {
+        var newScreens = Data_Functor.map(Data_Functor.functorArray)(function (scr) {
+            var $24 = scr.key === oldKey;
+            if ($24) {
+                return {
+                    links: addEmptyLinkToArray(scr.links),
+                    key: scr.key,
+                    img: scr.img,
+                    text: scr.text
+                };
+            };
+            return scr;
+        })(story.screens);
+        return {
+            title: story.title,
+            screens: newScreens
+        };
+    };
+};
 module.exports = {
     parseStory: parseStory,
     title: title,
@@ -1282,15 +1434,21 @@ module.exports = {
     updateKey: updateKey,
     updateText: updateText,
     updateImg: updateImg,
-    putImageInScreen: putImageInScreen
+    putImageInScreen: putImageInScreen,
+    addEmptyLink: addEmptyLink,
+    addEmptyLinkToArray: addEmptyLinkToArray,
+    updateLinkKey: updateLinkKey,
+    updateLinkByKey: updateLinkByKey,
+    updateLinkText: updateLinkText,
+    updateLinkTextByKey: updateLinkTextByKey
 };
 
 },{"../Control.Apply/index.js":22,"../Data.Array/index.js":63,"../Data.Either/index.js":86,"../Data.Eq/index.js":90,"../Data.Foldable/index.js":95,"../Data.Function/index.js":99,"../Data.Functor/index.js":104,"../Data.Maybe/index.js":121,"../Data.Ord/index.js":140,"../Data.String.CodePoints/index.js":155,"../Data.String/index.js":163,"../Data.Symbol/index.js":165,"../Prelude/index.js":223,"../Simple.JSON/index.js":232}],16:[function(require,module,exports){
-// Generated by purs version 0.12.0
 "use strict";
 var App_Edit = require("../App.Edit/index.js");
 var App_State = require("../App.State/index.js");
 var App_Story = require("../App.Story/index.js");
+var Data_Array = require("../Data.Array/index.js");
 var Data_Function = require("../Data.Function/index.js");
 var Data_Functor = require("../Data.Functor/index.js");
 var Data_Maybe = require("../Data.Maybe/index.js");
@@ -1301,11 +1459,15 @@ var Hedwig_Event = require("../Hedwig.Event/index.js");
 var Hedwig_Foreign = require("../Hedwig.Foreign/index.js");
 var Hedwig_Property = require("../Hedwig.Property/index.js");
 var Prelude = require("../Prelude/index.js");
-var screenLink = function (link) {
-    return Hedwig_Element.div([ Hedwig_Property["class'"]("screenLink") ])([ Hedwig_Foreign.text(link.key + (" - " + link.text)) ]);
+var screenLink = function (key) {
+    return function (index) {
+        return function (link) {
+            return Hedwig_Element.div([ Hedwig_Property["class'"]("screenLink") ])([ Hedwig_Foreign.text("Link to:"), Hedwig_Element.input([ Hedwig_Property["type'"]("text"), Hedwig_Property.value(link.key), Hedwig_Event.onInput(App_State.EditLinkKey.create(key)(index)) ])([  ]), Hedwig_Foreign.text("Text:"), Hedwig_Element.input([ Hedwig_Property["type'"]("text"), Hedwig_Property.value(link.text), Hedwig_Event.onInput(App_State.EditLinkText.create(key)(index)) ])([  ]) ]);
+        };
+    };
 };
 var screenForm = function (scr) {
-    return Hedwig_Element.form([  ])([ Hedwig_Element.div([  ])([ Hedwig_Element.label([ Hedwig_Property["for"]("key") ])([ Hedwig_Foreign.text("Key:") ]), Hedwig_Element.input([ Hedwig_Property.name("key"), Hedwig_Property["type'"]("text"), Hedwig_Property.value(scr.key), Hedwig_Event.onInput(App_State.EditKey.create(scr.key)) ])([  ]) ]), Hedwig_Element.div([  ])([ Hedwig_Element.label([ Hedwig_Property["for"]("text") ])([ Hedwig_Foreign.text("Text:") ]), Hedwig_Element.input([ Hedwig_Property.name("text"), Hedwig_Property["type'"]("text"), Hedwig_Property.value(scr.text), Hedwig_Event.onInput(App_State.EditText.create(scr.key)) ])([  ]) ]), Hedwig_Element.div([  ])([ Hedwig_Element.label([ Hedwig_Property["for"]("img") ])([ Hedwig_Foreign.text("Image:") ]), Hedwig_Element.input([ Hedwig_Property.name("img"), Hedwig_Property.value(Data_Maybe.fromMaybe("")(scr.img)), Hedwig_Event.onInput(App_State.EditImg.create(scr.key)) ])([  ]) ]), Hedwig_Element.div([  ])([ Hedwig_Element.label([ Hedwig_Property["for"]("links") ])([ Hedwig_Foreign.text("Links:") ]), Hedwig_Element.div([ Hedwig_Property["class'"]("links") ])(Data_Functor.map(Data_Functor.functorArray)(screenLink)(scr.links)) ]) ]);
+    return Hedwig_Element.div([ Hedwig_Property["class'"]("form") ])([ Hedwig_Element.div([  ])([ Hedwig_Element.label([ Hedwig_Property["for"]("key") ])([ Hedwig_Foreign.text("Key:") ]), Hedwig_Element.input([ Hedwig_Property.name("key"), Hedwig_Property["type'"]("text"), Hedwig_Property.value(scr.key), Hedwig_Event.onInput(App_State.EditKey.create(scr.key)) ])([  ]) ]), Hedwig_Element.div([  ])([ Hedwig_Element.label([ Hedwig_Property["for"]("text") ])([ Hedwig_Foreign.text("Text:") ]), Hedwig_Element.input([ Hedwig_Property.name("text"), Hedwig_Property["type'"]("text"), Hedwig_Property.value(scr.text), Hedwig_Event.onInput(App_State.EditText.create(scr.key)) ])([  ]) ]), Hedwig_Element.div([  ])([ Hedwig_Element.label([ Hedwig_Property["for"]("img") ])([ Hedwig_Foreign.text("Image:") ]), Hedwig_Element.input([ Hedwig_Property.name("img"), Hedwig_Property.value(Data_Maybe.fromMaybe("")(scr.img)), Hedwig_Event.onInput(App_State.EditImg.create(scr.key)) ])([  ]) ]), Hedwig_Element.div([  ])([ Hedwig_Element.label([ Hedwig_Property["for"]("links") ])([ Hedwig_Foreign.text("Links:") ]), Hedwig_Element.div([ Hedwig_Property["class'"]("links") ])(Data_Array.mapWithIndex(screenLink(scr.key))(scr.links)), Hedwig_Element.button([ Hedwig_Event.onClick(new App_State.EditAddLink(scr.key)) ])([ Hedwig_Foreign.text("Add new link") ]) ]) ]);
 };
 var screen = function (scr) {
     return Hedwig_Element.div([ Hedwig_Event.onClick(new App_State.ChangeEditScreen(scr.key)) ])([ Hedwig_Foreign.text(scr.key + (" - " + scr.text)) ]);
@@ -1333,7 +1495,7 @@ var view = function (edit) {
         if (edit.editing) {
             return sideBar(edit)(story);
         };
-        throw new Error("Failed pattern match at App.View.Edit line 12, column 19 - line 14, column 32: " + [ edit.editing.constructor.name ]);
+        throw new Error("Failed pattern match at App.View.Edit line 13, column 19 - line 15, column 32: " + [ edit.editing.constructor.name ]);
     };
 };
 module.exports = {
@@ -1345,7 +1507,7 @@ module.exports = {
     screenLink: screenLink
 };
 
-},{"../App.Edit/index.js":12,"../App.State/index.js":13,"../App.Story/index.js":15,"../Data.Function/index.js":99,"../Data.Functor/index.js":104,"../Data.Maybe/index.js":121,"../Data.Semigroup/index.js":149,"../Hedwig.Element/index.js":210,"../Hedwig.Event/index.js":211,"../Hedwig.Foreign/index.js":213,"../Hedwig.Property/index.js":214,"../Hedwig/index.js":215,"../Prelude/index.js":223}],17:[function(require,module,exports){
+},{"../App.Edit/index.js":12,"../App.State/index.js":13,"../App.Story/index.js":15,"../Data.Array/index.js":63,"../Data.Function/index.js":99,"../Data.Functor/index.js":104,"../Data.Maybe/index.js":121,"../Data.Semigroup/index.js":149,"../Hedwig.Element/index.js":210,"../Hedwig.Event/index.js":211,"../Hedwig.Foreign/index.js":213,"../Hedwig.Property/index.js":214,"../Hedwig/index.js":215,"../Prelude/index.js":223}],17:[function(require,module,exports){
 // Generated by purs version 0.12.0
 "use strict";
 var App_State = require("../App.State/index.js");
@@ -25721,7 +25883,28 @@ var update = function (model) {
                 edit: model.edit
             };
         };
-        throw new Error("Failed pattern match at Main line 28, column 16 - line 41, column 4: " + [ v.constructor.name ]);
+        if (v instanceof App_State.EditAddLink) {
+            return {
+                story: App_Story.addEmptyLink(v.value0)(model.story),
+                play: model.play,
+                edit: model.edit
+            };
+        };
+        if (v instanceof App_State.EditLinkKey) {
+            return {
+                story: App_Story.updateLinkKey(v.value0)(v.value1)(v.value2)(model.story),
+                play: model.play,
+                edit: model.edit
+            };
+        };
+        if (v instanceof App_State.EditLinkText) {
+            return {
+                story: App_Story.updateLinkText(v.value0)(v.value1)(v.value2)(model.story),
+                play: model.play,
+                edit: model.edit
+            };
+        };
+        throw new Error("Failed pattern match at Main line 28, column 16 - line 50, column 4: " + [ v.constructor.name ]);
     };
 };
 var main = Hedwig_Application.mount("main")({

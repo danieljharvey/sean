@@ -50,12 +50,12 @@ body {
   flex: 1;
 }
 
-.screenForm form label {
+.screenForm .form label {
   margin-right: 20px;
 }
 
-.screenForm form input,
-.screenForm form textarea {
+.screenForm .form input,
+.screenForm .form textarea {
   margin: 20px;
 }
 

@@ -4,7 +4,7 @@ import Prelude
 
 import App.State (Model, Msg(..))
 import App.Story.Test (testStory)
-import App.Story (updateKey, updateText, updateImg)
+import App.Story (updateKey, updateText, updateImg, addEmptyLink, updateLinkKey, updateLinkText)
 import App.View.Story as Story
 import App.View.Edit as Edit
 import Data.Maybe (Maybe(..))
@@ -38,6 +38,15 @@ update model = case _ of
   }
   EditImg oldKey newImg -> model {
     story = updateImg oldKey newImg model.story
+  }
+  EditAddLink oldKey -> model {
+    story = addEmptyLink oldKey model.story
+  }
+  EditLinkKey oldKey index newLink -> model {
+    story = updateLinkKey oldKey index newLink model.story
+  }
+  EditLinkText oldKey index newText -> model {
+    story = updateLinkText oldKey index newText model.story
   }
 
 view :: Model -> H.Html Msg
