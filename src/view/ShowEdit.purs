@@ -16,6 +16,7 @@ view edit story = case edit.editing of
 
 sideBar :: EditSettings -> Story -> H.Html Msg
 sideBar edit story = H.div [H.class' "sideBar"] [
+    H.button [H.onClick StartSave] [H.text "SAVE"],
     H.div [H.class' "screenList"] $ [screenList story],
     H.div [H.class' "screenForm"] $ [editForm]
 ] where editForm = case (getEditingScreen edit story) of 

@@ -1,7 +1,7 @@
 module App.State where
 
 import App.Story (Story, Key)
-
+import Prelude
 import Data.Maybe
 
 type EditSettings = {
@@ -18,6 +18,10 @@ type Model = {
 }
 
 data Msg = Reset 
+         | StartSave
+         | SaveComplete Boolean
+         | DoNothing Unit
+         | LogJSON
          | ChangeScreen Key 
          | ChangeEditScreen Key
          | EditKey Key Key

@@ -6,7 +6,7 @@ import Data.Array (find, head, snoc, mapWithIndex)
 import Data.Either (hush)
 import Data.Maybe (Maybe(..), isJust)
 import Data.String (length)
-import Simple.JSON (readJSON)
+import Simple.JSON (readJSON, writeJSON)
 
 type Key = String
 
@@ -29,6 +29,9 @@ type Story =
 
 parseStory :: String -> Maybe Story
 parseStory s = hush $ readJSON s
+
+writeStory :: Story -> String
+writeStory = writeJSON
 
 title :: Story -> String
 title s = s.title
