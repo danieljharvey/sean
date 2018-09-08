@@ -2,22 +2,123 @@ module Test.Main where
 
 import Prelude
 
-import Effect.Aff (Aff)
-import Effect (Effect)
-import App.Story (Story, findScreen, img, links, parseStory, screens, text, title, validateLink)
-import Data.Maybe (Maybe(..), isJust)
+import App.Story (Story, findScreen, img, links, parseStory, screens, text, title, validateLink, updateKey, updateText, updateImg, addEmptyLink, updateLinkKey, updateLinkText)
 import Data.Array (length, head)
-import Test.Unit (suite, test)
-import Test.Unit.Main (runTest)
-import Test.Unit.Assert as Assert
-
-import Node.FS.Aff as FS
+import Data.Maybe (Maybe(..), isJust)
+import Effect (Effect)
+import Effect.Aff (Aff)
 import Node.Encoding (Encoding(..))
+import Node.FS.Aff as FS
+import Test.Unit (suite, test)
+import Test.Unit.Assert as Assert
+import Test.Unit.Main (runTest)
 
 getTestStory :: Aff (Maybe Story)
 getTestStory = do
   fileContents <- FS.readTextFile UTF8 "./test/test.json"
   pure $ parseStory fileContents
+
+testStory :: Story
+testStory = {
+  title : "test",
+  screens: [
+    {
+      key : "test",
+      img : Nothing,
+      text : "test time",
+      links: []
+    }
+  ]
+}
+
+expectedKeyChange :: Story
+expectedKeyChange = {
+  title : "test",
+  screens: [
+    {
+      key : "changed",
+      img : Nothing,
+      text : "test time",
+      links: []
+    }
+  ]
+}
+
+expectedTextChange :: Story
+expectedTextChange = {
+  title : "test",
+  screens: [
+    {
+      key : "test",
+      img : Nothing,
+      text : "bing bong",
+      links: []
+    }
+  ]
+}
+
+expectedImgChange :: Story
+expectedImgChange = {
+  title : "test",
+  screens: [
+    {
+      key : "test",
+      img : Just "image.jpg",
+      text : "test time",
+      links: []
+    }
+  ]
+}
+
+addEmptyLinkStory :: Story
+addEmptyLinkStory = {
+  title : "test",
+  screens: [
+    {
+      key : "test",
+      img : Nothing,
+      text : "test time",
+      links: [{
+        text: "", 
+        key: ""
+      }]
+    }
+  ]
+}
+
+
+changedLinkKeyStory :: Story
+changedLinkKeyStory = {
+  title : "test",
+  screens: [
+    {
+      key : "test",
+      img : Nothing,
+      text : "test time",
+      links: [{
+        text: "", 
+        key: "poo"
+      }]
+    }
+  ]
+}
+
+changedLinkTextStory :: Story
+changedLinkTextStory = {
+  title : "test",
+  screens: [
+    {
+      key : "test",
+      img : Nothing,
+      text : "test time",
+      links: [{
+        text: "yep", 
+        key: ""
+      }]
+    }
+  ]
+}
+
 
 main :: Effect Unit
 main = runTest do
@@ -51,5 +152,21 @@ main = runTest do
         let valid = validateLink <$> story <*> firstLink
         Assert.equal (Just false) valid
     
+    suite "Editing" do
+      test "Change a key" do
+        Assert.equal expectedKeyChange $ updateKey "test" "changed" testStory
+      test "Change the text" do
+        Assert.equal expectedTextChange $ updateText "test" "bing bong" testStory
+      test "Change the image" do
+        Assert.equal expectedImgChange $ updateImg "test" "image.jpg" testStory
+      test "Changing image to empty string makes Nothing" do
+        Assert.equal testStory $ updateImg "test" "" testStory
+      test "Adding an empty link" do
+        Assert.equal addEmptyLinkStory $ addEmptyLink "test" testStory
+      test "Change a link's key" do
+        Assert.equal changedLinkKeyStory $ updateLinkKey "test" 0 "poo" addEmptyLinkStory
+      test "Change a link's text" do
+        Assert.equal changedLinkTextStory $ updateLinkText "test" 0 "yep" addEmptyLinkStory
+        
 
     
