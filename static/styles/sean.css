@@ -15,6 +15,10 @@ body {
   align-items: center;
 }
 
+.story {
+  margin: 20px;
+}
+
 .play {
   padding: 10px;
   background-color: #eeeeee;
@@ -61,4 +65,22 @@ body {
 
 .screenForm .links {
   margin-left: 50px;
+}
+
+.listEditScreen::before {
+  content: "";
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+  -moz-border-radius: 7.5px;
+  -webkit-border-radius: 7.5px;
+  border-radius: 7.5px;
+}
+.notEditingScreen::before {
+  background-color: #666666;
+}
+
+.editingScreen::before {
+  background-color: #69b6d5;
 }

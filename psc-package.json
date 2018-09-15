@@ -10,6 +10,7 @@
     "simple-json",
     "node-fs-aff",
     "test-unit",
+    "affjax",
     "hedwig"
   ]
 }

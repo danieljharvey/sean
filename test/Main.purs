@@ -2,7 +2,7 @@ module Test.Main where
 
 import Prelude
 
-import App.Story (Story, findScreen, img, links, parseStory, screens, text, title, validateLink, updateKey, updateText, updateImg, addEmptyLink, updateLinkKey, updateLinkText)
+import App.Story (Story, findScreen, img, links, parseStory, screens, text, title, validateLink, updateKey, updateText, updateImg, addEmptyLink, updateLinkKey, updateLinkText, updateAddScreen)
 import Data.Array (length, head)
 import Data.Maybe (Maybe(..), isJust)
 import Effect (Effect)
@@ -26,6 +26,25 @@ testStory = {
       key : "test",
       img : Nothing,
       text : "test time",
+      links: []
+    }
+  ]
+}
+
+addedScreenStory :: Story
+addedScreenStory = {
+  title : "test",
+  screens: [
+    {
+      key : "test",
+      img : Nothing,
+      text : "test time",
+      links: []
+    },
+    {
+      key: "",
+      img: Nothing,
+      text: "",
       links: []
     }
   ]
@@ -167,6 +186,8 @@ main = runTest do
         Assert.equal changedLinkKeyStory $ updateLinkKey "test" 0 "poo" addEmptyLinkStory
       test "Change a link's text" do
         Assert.equal changedLinkTextStory $ updateLinkText "test" 0 "yep" addEmptyLinkStory
-        
-
+      test "Add a new screen" do
+        Assert.equal addedScreenStory $ updateAddScreen testStory
+    
+    
     

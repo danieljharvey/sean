@@ -1,8 +1,8 @@
 module App.State where
 
 import App.Story (Story, Key)
-
-import Data.Maybe
+import Prelude
+import Data.Maybe (Maybe)
 
 type EditSettings = {
   editing :: Boolean,
@@ -17,9 +17,14 @@ type Model = {
   edit :: EditSettings
 }
 
-data Msg = Reset 
+data Msg = Reset
+         | StartLoad
+         | LoadComplete (Maybe Story)
+         | DoNothing Unit
+         | LogJSON
          | ChangeScreen Key 
          | ChangeEditScreen Key
+         | AddScreen
          | EditKey Key Key
          | EditText Key String
          | EditImg Key String
