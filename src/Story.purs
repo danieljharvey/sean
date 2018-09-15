@@ -1,12 +1,12 @@
 module App.Story where
 
 import Prelude
-
 import Data.Array (find, head, snoc, mapWithIndex)
 import Data.Either (hush)
 import Data.Maybe (Maybe(..), isJust)
 import Data.String (length)
 import Simple.JSON (readJSON, writeJSON)
+import Type.Data.Boolean (kind Boolean)
 
 type Key = String
 
@@ -26,6 +26,14 @@ type Story =
   { title :: String
   , screens :: Array Screen
   }
+
+emptyScreen :: Screen
+emptyScreen = {
+    key: "",
+    img: Nothing,
+    text: "",
+    links: []
+}
 
 parseStory :: String -> Maybe Story
 parseStory s = hush $ readJSON s
@@ -100,3 +108,7 @@ updateLinkText oldKey index newText story = story { screens = newScreens }
 
 updateLinkTextByKey :: Int -> String -> Array Link -> Array Link
 updateLinkTextByKey index newText linkArray = mapWithIndex (\i -> \link -> if i == index then link { text = newText } else link) linkArray
+
+updateAddScreen :: Story -> Story
+updateAddScreen story = story { screens = newScreens }
+    where newScreens = story.screens <> [emptyScreen]

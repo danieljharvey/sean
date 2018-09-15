@@ -2,15 +2,13 @@ module Main where
 
 import Prelude
 import App.State (Model, Msg(..))
-import App.Story.Test (testStory)
-import App.Story (Story, updateKey, updateText, updateImg, addEmptyLink, updateLinkKey, updateLinkText, writeStory)
+import App.Story (Story, updateKey, updateText, updateImg, addEmptyLink, updateLinkKey, updateLinkText, writeStory, parseStory, updateAddScreen)
 import App.View.Story as Story
 import App.View.Edit as Edit
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Either (hush)
-import Effect.Aff (launchAff_)
+import Effect.Aff (Aff)
 import Effect (Effect)
-import Effect.Class (liftEffect)
 import Effect.Console (log)
 import Hedwig ((:>))
 import Hedwig as H
@@ -21,9 +19,15 @@ import Network.HTTP.Affjax.Response as AXRes
 import Data.Argonaut.Core as J
 import Simple.JSON (readJSON)
 
+initStory :: Story
+initStory = {
+  title: "test",
+  screens: []
+}
+
 init :: Model
 init = {
-  story : testStory,
+  story : initStory,
   play : {
     currentKey : "start"
   },
@@ -38,25 +42,26 @@ type StoryJson = {
 }
 
 endpoint :: String
-endpoint = "http://localhost:8080/"
+endpoint = "http://localhost:8000/"
 
-loadStory :: Effect Unit
-loadStory = launchAff_ $ do
-  res <- AX.get AXRes.json $ endpoint <> "stories"
-  liftEffect $ log $ J.stringify res.response
+loadStory :: Aff (Maybe Story)
+loadStory = do
+  res <- AX.get AXRes.json $ endpoint <> "static/story/1.json"
+  pure $ parseStory $ J.stringify res.response
 
 decodeStoryJson :: String -> Maybe Story
 decodeStoryJson s = hush $ readJSON s
 
 update :: H.Update Model Msg
 update model msg = case msg of
-  Reset -> init :> []
+  Reset -> model { play = init.play } :> []
   DoNothing unit -> model :> []
   LogJSON -> model  :> [DoNothing <$> H.sync (log $ writeStory model.story)]
-  StartSave -> model :> [DoNothing <$> H.sync loadStory]
-  SaveComplete a -> model :> []
+  StartLoad -> model :> [LoadComplete <$> loadStory]
+  LoadComplete a -> model { story = fromMaybe model.story a } :> []
   ChangeScreen newKey -> model { play = model.play { currentKey = newKey } } :> []
   ChangeEditScreen newKey -> model { edit = model.edit { currentKey = Just newKey } } :> []
+  AddScreen -> model { story = updateAddScreen model.story } :> []
   EditKey oldKey newKey -> model { 
     edit = model.edit { currentKey = Just newKey }, 
     story = updateKey oldKey newKey model.story
@@ -89,7 +94,7 @@ view model = H.main [H.id "main"] [
 main :: Effect Unit
 main = do
   H.mount "main" {
-    init: init :> [],
+    init: init :> [pure StartLoad],
     update: \msg model -> update msg model,
     view
   }

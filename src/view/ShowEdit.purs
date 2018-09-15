@@ -2,10 +2,10 @@ module App.View.Edit where
 
 import Prelude
 
-import Data.Array (mapWithIndex)
-import App.Edit (getEditingScreen)
+import App.Edit (getEditingScreen, isEditing)
 import App.State (EditSettings, Msg(..))
 import App.Story (Story, Screen, Link, Key)
+import Data.Array (mapWithIndex)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Hedwig as H
 
@@ -16,21 +16,30 @@ view edit story = case edit.editing of
 
 sideBar :: EditSettings -> Story -> H.Html Msg
 sideBar edit story = H.div [H.class' "sideBar"] [
-    H.button [H.onClick StartSave] [H.text "SAVE"],
-    H.div [H.class' "screenList"] $ [screenList story],
+    H.button [H.onClick StartLoad] [H.text "LOAD"],
+    H.button [H.onClick LogJSON] [H.text "LOG"],
+    H.div [H.class' "screenList"] $ [screenList edit story],
     H.div [H.class' "screenForm"] $ [editForm]
 ] where editForm = case (getEditingScreen edit story) of 
             Just scr -> screenForm scr
             _        -> H.div [] [H.text "nothingness"]
 
-screenList :: Story -> H.Html Msg
-screenList story = H.div [] [
+screenList :: EditSettings -> Story -> H.Html Msg
+screenList edit story = H.div [] [
     H.p [] [H.text "Screens"],
-    H.div [] $ map screen story.screens
+    H.button [H.onClick AddScreen] [H.text "Add screen"],
+    H.div [] $ map (screen edit) story.screens
 ]
 
-screen :: Screen -> H.Html Msg
-screen scr = H.div [H.onClick $ ChangeEditScreen scr.key] [H.text $ scr.key <> " - " <> scr.text]
+screen :: EditSettings -> Screen -> H.Html Msg
+screen edit scr = H.div [
+        H.onClick $ ChangeEditScreen scr.key,
+        H.class' editingClass,
+        H.class' "listEditScreen" 
+    ] [
+        H.text $ scr.key <> " - " <> scr.text
+    ]
+    where editingClass = if isEditing edit scr then "editingScreen" else "notEditingScreen"
 
 screenForm :: Screen -> H.Html Msg
 screenForm scr = H.div [H.class' "form"] [
