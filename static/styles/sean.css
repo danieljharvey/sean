@@ -67,12 +67,12 @@ body {
 }
 
 .screenForm .form label {
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .screenForm .form input,
 .screenForm .form textarea {
-  margin: 20px;
+  margin: 10px;
 }
 
 .screenForm .form textarea {
@@ -88,7 +88,7 @@ body {
   margin-left: 50px;
 }
 
-.listEditScreen::before {
+.showCircle::before {
   content: "";
   display: inline-block;
   width: 15px;
@@ -98,10 +98,19 @@ body {
   -webkit-border-radius: 7.5px;
   border-radius: 7.5px;
 }
-.notEditingScreen::before {
+
+.showCircle.notEditingScreen::before {
   background-color: #666666;
 }
 
-.editingScreen::before {
+.showCircle.editingScreen::before {
   background-color: #69b6d5;
+}
+
+.showCircle.validLink::before {
+  background-color: rgb(67, 160, 67);
+}
+
+.showCircle.invalidLink::before {
+  background-color: rgb(163, 66, 66);
 }
