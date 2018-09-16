@@ -4,8 +4,9 @@ import Prelude
 import App.State (Msg(..))
 import App.Story (Key, Screen, Story, Link, findScreen, validateLink)
 import Control.Monad.Reader (Reader, ask, runReader)
-import Data.Maybe (fromMaybe)
+import Data.Maybe (Maybe, fromMaybe)
 import Hedwig as H
+import Data.String (Pattern(..), split)
 
 view :: Key -> Story -> H.Html Msg
 view key story = runReader (renderStory key story) story
@@ -20,10 +21,22 @@ renderScreen :: Screen -> Reader Story (H.Html Msg)
 renderScreen scr = do
     story <- ask
     pure $ H.div [H.id ("screen" <> scr.key), H.class' "story"] [
-        fromMaybe (H.div [] []) $ map (\img -> H.img [H.src img] []) scr.img,
-        H.text scr.text,
+        renderImage scr.img,
+        renderText scr.text,
         runReader (renderLinks scr.links) story
     ]
+
+renderImage :: Maybe String -> H.Html Msg
+renderImage image = fromMaybe default $ map showImage image
+    where default = H.div [] []
+          showImage = (\img -> H.img [H.src img, H.class' "storyImage"] [])
+
+splitPattern :: Pattern
+splitPattern = Pattern "\n\n"
+
+renderText :: String -> H.Html Msg
+renderText s = H.div [] paragraphs
+    where paragraphs = map (\txt -> H.p [] [H.text txt]) (split splitPattern s)
     
 renderLinks :: Array Link -> Reader Story (H.Html Msg)
 renderLinks links = do
@@ -31,7 +44,11 @@ renderLinks links = do
     pure $ H.div [] (map (renderLink story) links)
 
 renderLink :: Story -> Link -> H.Html Msg
-renderLink story link = H.button attrs [H.text link.text]
+renderLink story link = H.a attrs [H.text link.text]
     where attrs = case (validateLink story link) of
-            true  -> [H.onClick $ ChangeScreen link.key]
-            false -> []
+            true  -> [
+                H.onClick $ ChangeScreen link.key,
+                H.class' "activeStoryLink"
+            ] <> fixedAttrs
+            false -> [] <> fixedAttrs
+          fixedAttrs = [H.class' "storyLink"]

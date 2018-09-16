@@ -2,20 +2,102 @@
   "title": "Test",
   "screens": [
     {
-      "text": "Good morning Sean.",
+      "text": "Good morning Sean. It's a delicious morning. What are you going to do first?",
       "links": [
         { "text": "Go to the toilet", "key": "toilet" },
         { "text": "Go to the small claims court", "key": "small-claims-court" },
         { "text": "Eat some Special K", "key": "special-k" }
       ],
       "key": "start",
-      "img": "http://onwardolympians.com/seans-big-day/images/start.jpg"
+      "img": "static/images/start.jpg"
     },
-    { "text": "It is the toilet", "links": [], "key": "toilet" },
     {
-      "text": "There were horses, oh yes, there were certainly horses",
-      "links": [],
-      "key": "Toes"
+      "text": "Ahh. The toilet. So many memories. No time for toilet activities now though.",
+      "links": [
+        { "text": "Check the mirror", "key": "mirror" },
+        { "text": "Leave the toilet", "key": "start" }
+      ],
+      "key": "toilet",
+      "img": "static/images/toilet.jpg"
+    },
+    {
+      "text": "There he is.",
+      "links": [
+        { "text": "Leave the toilet", "key": "small-claims-court" },
+        {
+          "text": "Stare in to your own mesmerising eyes",
+          "key": "seans-brain"
+        }
+      ],
+      "key": "mirror",
+      "img": "static/images/mirror.jpg"
+    },
+    {
+      "text": "Delicious. What a great way to start the day.",
+      "links": [
+        {
+          "text": "This is all very well but I am going to need the toilet now.",
+          "key": "toilet"
+        }
+      ],
+      "key": "special-k",
+      "img": "static/images/special-k.jpg"
+    },
+    {
+      "text": "It's filthy in here. You should really clean it, shouldn't you?",
+      "links": [
+        {
+          "text": "No way, it's my brain and I can do what I want with it",
+          "key": "toilet"
+        },
+        {
+          "text": "Yes, you are right. You are always right",
+          "key": "cleaning-cupboard"
+        }
+      ],
+      "key": "seans-brain",
+      "img": "static/images/seans-brain.jpg"
+    },
+    {
+      "text": "What's the matter, Sean? Haven't you ever cleaned a brain before? You know what to use don't you?",
+      "links": [
+        { "text": "Toothpick", "key": "unconscious" },
+        { "text": "Bleach-soaked rag", "key": "unconscious" },
+        { "text": "Cannabis", "key": "unconscious" },
+        { "text": "Jet hose", "key": "bathroom-sink" }
+      ],
+      "key": "cleaning-cupboard",
+      "img": "static/images/cleaning-cupboard.jpg"
+    },
+    {
+      "text": "That looked like it was painful. Do you feel better now?",
+      "links": [
+        {
+          "text": "Yes, that washed away all of the nerves and I am ready for the small claims court",
+          "key": "small-claims-court"
+        },
+        {
+          "text": "No. Is my nose ok? I need to check my face in the mirror",
+          "key": "mirror"
+        }
+      ],
+      "key": "bathroom-sink",
+      "img": "static/images/bathroom-sink.jpg"
+    },
+    {
+      "text": "WAKE UP SEAN. You have been laying on the bathroom floor of the small claims court for days now... Is that smell coming from your trousers?",
+      "links": [
+        {
+          "text": "Deny everything and resume your day",
+          "key": "small-claims-court"
+        },
+        {
+          "text": "Run home for a quick wash and a bowl of Special K",
+          "key": "special-k"
+        }
+      ],
+      "key": "unconscious",
+      "img": "static/images/unconscious.jpg"
     }
   ]
 }
