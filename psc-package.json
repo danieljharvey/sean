@@ -3,14 +3,15 @@
   "set": "psc-0.12.0-20180828",
   "source": "https://github.com/purescript/package-sets.git",
   "depends": [
+    "affjax",
     "console",
+    "debug",
     "effect",
+    "hedwig",
+    "node-fs-aff",
     "prelude",
     "psci-support",
     "simple-json",
-    "node-fs-aff",
-    "test-unit",
-    "affjax",
-    "hedwig"
+    "test-unit"
   ]
 }

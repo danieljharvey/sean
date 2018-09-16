@@ -8,6 +8,7 @@ import App.Story (Story, Screen, Link, Key)
 import Data.Array (mapWithIndex)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Hedwig as H
+import App.OnTextAreaInput (onTextAreaInput)
 
 view :: EditSettings -> Story -> H.Html Msg
 view edit story = case edit.editing of 
@@ -54,12 +55,10 @@ screenForm scr = H.div [H.class' "form"] [
     ],
     H.div [] [
         H.label [H.for "text"] [H.text "Text:"],
-        H.input [
+        H.textarea [
             H.name "text",
-            H.type' "text",
-            H.value scr.text,
-            H.onInput $ EditText scr.key
-        ] []
+            onTextAreaInput $ EditText scr.key
+        ] [H.text scr.text]
     ],
     H.div [] [
         H.label [H.for "img"] [H.text "Image:"],
