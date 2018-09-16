@@ -15,3 +15,6 @@ isEditing edit screen = edit.currentKey == Just screen.key
 linkIsValid :: Array Screen -> Link -> Boolean
 linkIsValid screens link = isJust $ elemIndex link.key screenKeys
     where screenKeys = map (\t -> t.key) screens
+
+toggleEdit :: EditSettings -> EditSettings
+toggleEdit edit = edit { editing = (not edit.editing) }

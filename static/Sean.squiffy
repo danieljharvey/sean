@@ -1,0 +1,542 @@
+[[janitor-a-c]]:
+
+"I have seen many crimes."
+
+[[Threaten judge with gavel]](toilet2)
+
+[[How many crimes?]](janitor-a-c2)
+
+[[Leave the judge alone]](janitor-7)
+
+[[janitor-a-c2]]:
+
+"Many crimes."
+
+[[Threaten judge with gavel]](toilet2)
+
+[[But how many crimes?]](janitor-a-c3)
+
+[[Leave the judge alone]](janitor-7)
+
+[[janitor-a-c3]]:
+
+"Many crimes."
+
+[[Threaten judge with gavel]](toilet2)
+
+[[But exactly how many crimes?]](janitor-a-c4)
+
+[[Leave the judge alone]](janitor-7)
+
+[[janitor-a-c4]]:
+
+"Many crimes."
+
+[[I would appreciate it if you could tell me using a number.]](janitor-a-c5)
+
+[[Leave the judge alone]](janitor-7)
+
+[[Threaten judge with gavel]](toilet2)
+
+[[janitor-a-c5]]:
+
+"Many crimes."
+
+[[Just a rough ball park figure would satisfy my curiosity at this point.]](janitor-a-c6)
+
+[[Leave the judge alone]](janitor-7)
+
+[[Threaten judge with gavel]](toilet2)
+
+[[janitor-a-c6]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/case-2-10a-case-2-10c6.jpg'>
+
+"Many crimes."
+
+[[Threaten judge with gavel]](toilet2)
+
+[[Leave the judge alone]](janitor-7)
+
+[[Look under the stairs again because this is now very awkward.]](janitor-8)
+
+[[toilet2]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/toilet-2.jpg'>
+
+The judge seems to have dragged you in to the toilets and is staring at you in a very confusing way. His eyes are like two hot coals in the palm of his fart-glove face. 
+
+[[Ask judge how many crimes he has seen]](janitor-a-c)
+
+[[Remove judges wig and bonk his head with the gavel]](congratulations)
+
+[[Slowly lean in and pucker your lips for a kiss]](unconscious2)
+
+[[unconscious2]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/unconscious-2.jpg'>
+
+WAKE UP SEAN. You have been laying on the bathroom floor of the small claims court for hours... That judge sure gave you a good one. What are you going to do about it?
+
+[[Go and confront the judge]](toilet2)
+
+[[Look in the mirror and try to forget what just happened]](mirror)
+
+[[congratulations]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/congratulations.jpg'>
+
+Upon parting the judges hair you find a tiny crown. You have killed the king rat, congratulations. You truly are a force of justice, you should try your hand at being a lawyer?
+
+[[But I am a janitor]](lawyer)
+
+[[Ok, let me just sweep up this mess]](case 3)
+
+[[janitor-b-0]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/case-2-11-case-2-11c.jpg'>
+
+This is really bothering you isn't it?
+
+[[No, I respect the quiet pride of manual labour]](janitor-b-a)
+
+[[OK, a bit...]](janitor-b-a)
+
+[[janitor-b-a]]:
+
+Is being a janitor somewhat beneath you? Are you above cleaning? And chasing rats? And bonking said rats? Is that it?
+
+[[I wouldn't say above it, but it's not really where my enthusiasms lay]](janitor-b-b)
+
+[[That's an unfair statement, to be a janitor is a fine job!]](janitor-7)
+
+[[janitor-b-b]]:
+
+Let's face it, you'd rather somebody else did the rat bonking.
+
+[[Yes]](janitor-b-c)
+
+[[Yeah]](janitor-b-c)
+
+[[Basically]](janitor-b-c)
+
+[[janitor-b-c]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/case-2-11-case-2-11c.jpg'>
+
+I think it's better if we're just honest about this.
+
+[[Yes, that seems best]](lawyer)
+
+[[Steve told me that a janitor is a silly job and I didn't believe him at the time but I have to admit now that it is starting to bother me.]](lawyer)
+
+[[janitor-12]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/case-2-12.jpg'>
+
+"No. I have not seen the King Rat around here. Perhaps you might like to look somewhere else such as under the stairs."
+
+[[OK. Thanks.]](janitor-7)
+
+[[lawyer]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/case-3.jpg'>
+
+Put that broom down! You are a big important lawyer, such things do not concern you. Now let's do some law!
+
+[[But first let's go and have some Special K]](special-k)
+
+[[Go and see the new judge]](courtroom)
+
+[[courtroom]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/courtroom.jpg'>
+
+Well done Sean, you barged in to the courtroom during sentencing and now everybody is staring. You should go over to the judge seeing as he has just summoned you. He looks angry. What do you want to say to the judge?
+
+[[Ask judge how many crimes he has seen]](courtroom2)
+
+[[Tell judge that you have killed the rat king and he needs to help bury the body]](burial)
+
+[[Apologise and ask to bring your first witness to the stand]](case-begins)
+
+[[courtroom2]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/courtroom-2.jpg'>
+
+"Two crimes."
+
+[[Oh. Thanks.]](case-begins)
+
+[[burial]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/burial.jpg'>
+
+Now that you have dug the hole you should help the judge throw the body in as he looks a little old and frail. 
+
+[[Help judge with body]](case-begins)
+
+[[Ask judge how many crimes he has committed]](burial1)
+
+[[Push judge in hole and steal his wig]](case-begins)
+
+[[burial1]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/burial-1-to-5.jpg'>
+
+"Many crimes."
+
+[[But they still allow you to be a judge?]](burial2)
+
+[[Abandon this worrying line of enquiry]](burial)
+
+[[burial2]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/burial-1-to-5.jpg'>
+
+"Many, many crimes."
+
+[[And you've served time for these crimes?]](burial3)
+
+[[Abandon this worrying line of enquiry]](burial)
+
+[[burial3]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/burial-1-to-5.jpg'>
+
+"Many, many, dark crimes."
+
+[[I assume the court is aware of this? You're clearly a very troubled man.]](burial4)
+
+[[Abandon this worrying line of enquiry]](burial)
+
+[[burial4]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/burial-1-to-5.jpg'>
+
+"Many, many, dark, worrying, terrible crimes."
+
+[[Is anybody else hearing this? I feel like somebody else should be a little concerned here.]](burial5)
+
+[[Abandon this worrying line of enquiry]](burial)
+
+[[burial5]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/burial-1-to-5.jpg'>
+
+"Many, many, dark, worrying, terrible, bloody crimes."
+
+[[Probably as good a time as any to get on with the case.]](case-begins)
+
+[[case-begins]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/case-begins.jpg'>
+
+The judge is impressed with your boldness and has offered you a great opportunity to defend a client in a high-profile case. Are you going to take his offer?
+
+[[Most definitely]](big-case)
+
+[[I have nothing better to do]](big-case)
+
+[[NO. I am a janitor]](no-janitors)
+
+[[no-janitors]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/no-janitors.jpg'>
+
+You are not a janitor, Sean. Get your briefcase.
+
+[[Ok, sorry. I'll get my briefcase.]](big-case)
+
+[[big-case]]:
+
+<img src='http://onwardolympians.com/seans-big-day/images/small-claims-court.jpg'>
+
+Well hello there, Mr Bigshot. Look at you with your fancy briefcase and your over-polished shoes. I can see right up your nose. The court are waiting for your grand entrance, you should head in. 
+
+[[I am absolutely ready for this big moment.]](patent1)
+
+[[I'm almost ready, I just need to pick my outfit]](wardrobe)
+
+[[This might be a bad time to admit that I have no formal legal training]](big-janitor)
+
+[[wardrobe]]:
+
+I think you look great as you are Sean, what outfit change are you planning?
+
+[[10 inch platform brogues]](big-janitor)
+
+[[Knife tie]](big-janitor)
+
+[[Silly goggles]](big-janitor)
+
+
+[[big-janitor]]:
+
+The judge laughs at what he assumes is your very funny joke.
+
+[[Time for the case then I suppose]](patent1)
+
+[[Explain to the judge you really are painfully out of your depth]](big-janitor)
+
+[[patent1]]:
+
+<img src='https://s-media-cache-ak0.pinimg.com/564x/86/e2/93/86e29312cdb6694cf069af40ebf22066.jpg' style='width:80%;'>
+
+<b>CASE 1: MYSTERY OF THE BROOM SHOES PATENT</b>
+
+It is going to take all of your best law skills to unravel this law case about these mysterious items.
+
+Do you accept this case?
+
+[[Yes. This is exactly the kind of case that I could put my hand to]](patent2)
+
+[[Is there possibly another case that I could do instead?]](mystery0)
+
+[[patent2]]:
+
+Great. It's time to crack this case.
+
+[[Ask the judge what your motivation is for this scene]](patent2-1)
+
+[[Call your first witness]](patent3)
+
+[[patent2-1]]:
+
+The judge looks angry. Perhaps he is one of those "method" guys.
+
+[[Make mental note to discuss how underrated Chris Rock was in Rush Hour 2 later and get on with the case.]](patent3)
+
+[[patent3]]:
+
+<img src='http://www.arrowbrush.co.za/wp-content/uploads/2012/08/Kiddies-toy-broom.jpg' style='width:80%;'>
+
+Your first witness is a sturdy professional broom with a wooden handle. It looks worn by many years chasing dogs up and down stairs. If you play your cards right, this broom could be the backbone of your case. How do you want to play this?
+
+[[Go easy on him, this will show the jury you are compassionate and just]](patent3-1)
+
+[[Play it tough, show this broom you mean crime punching business.]](patent3-2)
+
+[[patent3-1]]:
+
+What will you ask the broom?
+
+[["You seem nice. Ever seen shoes with tiny brooms on before?"]](patent3-1a)
+
+[["It can't be easy being a broom, chasing dogs up and down stairs all day. Do you ever feel tired and somewhat empty? Also, have you ever seen shoes with tiny brooms on them before?"]](patent3-1b)
+
+[[patent3-1a]]:
+
+The broom looks uncomfortable. Perhaps you need to build up a relationship first before going in so hard.
+
+[["I have a great respect for the basic dignity in manual labour, and especially brooms like you that hold this country together. Since I was young I've held a small but significant dream close to my heart that dogs will one day chase themselves up and down stairs, and brooms like you will have their day in the sun. However, that is but a dream and today we are talking about today. Also, have you ever seen shoes with tiny brooms on before?"]](patent3-1c)
+
+[[Break the ice by discussing how underrated Chris Rock was in Rush Hour 2]](patent3-1b)
+
+[[patent3-1b]]:
+
+Your gentle relatable patter seems to be working. The broom visibly relaxes. It will soon be singing like a bird and you will be home and dry for a delicious bowl of Special K.
+
+[[Continue massaging the witness]](patent3-1c))
+
+[[patent3-1c]]:
+
+The broom speaks up
+
+"I have seen many many shoes in my time, but never before in my life have I seen a pair of shoes with a broom on them, and such an abomination is sickening to me."
+
+[[Nod sagely]](patent3-1d)
+
+[[Think about Rush Hour 2]](patent3-1d)
+
+[[patent3-1d]]:
+
+The broom continues:
+
+"However. I was watching the all night shopping programme and there it was. Broom shoes. The sight made me sick to my stomach and I would have been physically sick was I not a length of wood attached to a sturdy brush. Who could have thought of such a thing?"
+
+[[This case is very dull.]](patent3-3)
+
+[[Hear more from the broom about the things it saw on the shopping channel]](patend3-1e)
+
+[[patent3-1e]]:
+
+The broom talks for hours about shopping channels, and shoes, and brooms, and broom-shoes, and eventually other appliances, other channels and other courtrooms. You think about your life and your choices, and wonder whether the fast-paced world of law is for you. Is it you? Or is this stinking case? It's hard to tell anymore...
+
+[[Think about Rush Hour 2]](unconscious)
+
+[[Try to concentrate on the broom's long and tedious story]](unconscious)
+
+[[Dream about special k]](unconscious)
+
+[[patent3-2]]:
+
+You are very mean to the broom indeed. The broom cries. The jury cries. The judge cries.
+
+[[Leave the court room, they are not ready for your uncompromising law methods]](patent3-3)
+
+[[patent3-3]]:
+
+You run from the court room. Maybe you are not as ready for the fast-paced emotionally draining aspects of the law world as you thought.
+
+[[Yeah. That's right. I'd probably be better off as a janitor.]](janitor)
+
+[[Ask the judge for a different case.]](mystery0)
+
+[[mystery0]]:
+
+The judge looks confused.
+
+"Never in my numerous years of judging have I had somebody turn down such a juicy case. You've got balls, Sean. Big impressive swinging balls. I may have another case for you..."
+
+[[Quietly whisper to the judge that you are reasonably uncomfortable with him publically discussing such delicate matters in the courtroom]](sideroom)
+
+[[Yes, this new case sounds a lot better]](sideroom)
+
+[[Actually, perhaps the broom shoes might be more suited to my particular skill set]](sideroom)
+
+[[sideroom]]:
+
+The judge has taken you to a quiet side room to further discuss the matter.. 
+
+[[Quietly tell judge that you really are unsure such a topic is suitable for casual colleague-to-colleague small talk]](dinner)
+
+[[Ask judge if he would like to see the famous danglers]](revealed)
+
+[[dinner]]:
+
+You seem to be sat at the dining table in the judges house. He has cooked a whole leg of lamb with a balsamic glaze. There is a side of roast potatoes with rosemary and red onion and a small bowl of honey roast carrots and steamed brocolli. The food smells delicious. The judge is sat at the other end of the table. Apparently, despite this confusing change of scenery, he is still very keen to make some enquiries.
+
+[[Ask the judge if he will please pass the gravy]](anger)
+
+[[Tell the judge that you are not comfortable discussing the aforementioned with another man]](lady)
+
+[[Ask the judge his name]](sean)
+
+[[sean]]:
+
+'My name is Sean'
+
+[[Ha! How crazy, my name is also Sean. Do you also spell yours the Gaelic way?]](sean2)
+
+[[sean2]]:
+
+"Actually I spell mine with a W"
+
+[[Oh, that's a shame. I wonder how much more time you have spent filling in forms than I have because of that extra 'W']](anger)
+
+[[lady]]:
+
+The judge excuses himself and heads upstairs. A few minutes later a woman walks down the stairs. Her shoulders are pretty broad but she has a rather attractive set of legs. 'My name is Claire, and I have a few pressing enquiries if you would be so kind?'.
+
+[[Take Claire to one side and quietly let her know that you are pretty sure you can guess what said enquiries regard, and that such information is strictly never discussed outside of your doctor's surgery]](lady2)
+
+[[Ask Claire if she knows where the judge has gone]](lady3)
+
+[[lady3]]:
+
+"I'm afraid he's been called out on an emergency case, but is very sorry for the inconvenience and would be delighted if we'd plate up some dinner for his return. Now, back to the matter at hand..."
+
+[[Take Claire to one side and quietly let her know that this really is beginning to make you very anxious.]](lady2)
+
+[[lady2]]:
+
+Claire's eye starts to twitch and she slowly moves towards you in a threatening manner. You walk over to the table but she continues to slowly stomp her way over to you. It is remarkable how similar she is to the judge in her stance, build and voice. Speaking of the judge, I wonder where he is?
+
+[[Call for the judge]](lady4)
+
+[[Eat a potato]](cold)
+
+[[Ask Claire to kindly pass the gravy]](lady4)
+
+[[Explain that you noticed they had both the heating and the ceiling fan on, and that they could save money if they only used one or the other]](lady4)
+
+[[Push your index finger in to the leg of lamb]](cold)
+
+[[cold]]:
+
+It's cold in the middle. You should probably tell Claire.
+
+[[Tell Claire]](lady4)
+
+[[lady4]]:
+
+Suddenly Claire lets out a massive scream. A deep, growling scream. A really deep, growling scream. She grabs her hair and it all comes off in her hand. Wait a minute... She looks even more like the judge without her wig on. Remarkable!
+
+[[Ask her if she is related to Sean]](anger)
+
+[[Ask if the wig is horse hair]](anger)
+
+[[anger]]:
+
+The judge mounts the table and stamps all over the carrots. 'I HAVE AN EVER-INCREASING LIST OF MINOR STATISTICAL ENQUIRIES TO MAKE REGARDING YOUR BIG IMPRESSIVE SWINGING BALLS AND I WILL NOT STOP UNTIL YOU YIELD TO MY ENQUIRIES'. He is holding a knife.
+
+[[Ask the judge if he could kindly pass the gravy]](anger2)
+
+[[Slowly stand up from your chair and move towards the door]](anger2)
+
+[[anger2]]:
+
+The judge points the knife right at your eye and menacingly wiggles it around. 'TELL ME...'
+
+[[Ok, no need to be so pushy]](reveal)
+
+[[reveal]]:
+
+You undo your flies and whip out your old boy.
+
+'I DONT WANT TO SEE THAT. SHOW ME THE BIG IMPRESSIVE SWINGING BALLS'.
+
+You give in and pull out the balls. They are not unimpressive by conventional understanding but nothing to write home about. The judge seems satisfied. 
+
+[[Return to courtroom and forget this whole sordid tangent]](mystery1)
+
+[[Jiggle them around a bit]](hurts)
+
+[[hurts]]:
+
+That did not go down well. Curiosity now clearly sated, the judge seems uninterested and somewhat offended that you would do such a thing in his company.
+
+[[Continue regardless]](unconscious3)
+
+[[He's probably right. It had seemed a good idea but now in retrospect less so. I should get back to the courtroom]](mystery1)
+
+[[unconscious3]]:
+
+WAKE UP SEAN. You have been laying on the floor of the judges house for hours now. There is a note pinned to your chest telling you to return to court once you have finished jiggling your balls around.
+
+[[Return to courtroom]](mystery1)
+
+[[Stand up and jiggle balls a little more]](unconscious3)
+
+[[mystery1]]:
+
+<img src='http://www.hdwallpapersnew.net/wp-content/uploads/2015/08/rat-king-high-resolution-wallpaper-for-desktop-background-download-free.jpg' style='width:80%;'>
+
+<b>CASE 2: THE MYSTERIOUS BONKING OF THE KING RAT</b>
+
+This is surely the kind of case you would enjoy, full of cunning and intrigue?
+
+Do you accept this case?
+
+[[Yes. This seems like the kind of case that I could really get into.]](mystery2)
+
+[[I don't feel comfortable turning this down.]](mystery2)
+
+[[mystery2]]:
+
+<b>Congratulations. You have completed chapter 1. The story continues in "Sean's Big Day 2: The Sean Ultimatum"</b>
+
+[[But I am excited and wish to click things more.]](mystery3)
+
+[[mystery3]]:
+
+OK. Very well. But please be careful.
+
+[[Click click click click click.]](mystery4)
+
+[[mystery4]]:
+
+I'm just glad you're having a good time.
+
+[[Click click click click click.]](mystery3)

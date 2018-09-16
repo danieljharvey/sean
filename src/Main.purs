@@ -3,6 +3,7 @@ module Main where
 import Prelude
 import App.State (Model, Msg(..))
 import App.Story (Story, updateKey, updateText, updateImg, addEmptyLink, updateLinkKey, updateLinkText, writeStory, parseStory, updateAddScreen)
+import App.Edit
 import App.View.Story as Story
 import App.View.Edit as Edit
 import Data.Maybe (Maybe(..), fromMaybe)
@@ -32,7 +33,7 @@ init = {
     currentKey : "start"
   },
   edit : {
-    editing : true,
+    editing : false,
     currentKey : Just "start"
   }
 }
@@ -56,6 +57,7 @@ update :: H.Update Model Msg
 update model msg = case msg of
   Reset -> model { play = init.play } :> []
   DoNothing unit -> model :> []
+  ToggleEdit -> model { edit = toggleEdit model.edit } :> []
   LogJSON -> model  :> [DoNothing <$> H.sync (log $ writeStory model.story)]
   StartLoad -> model :> [LoadComplete <$> loadStory]
   LoadComplete a -> model { story = fromMaybe model.story a } :> []
@@ -86,6 +88,7 @@ view :: Model -> H.Html Msg
 view model = H.main [H.id "main"] [
   H.div [H.class' "play"] [
     H.button [H.onClick Reset] [H.text "Start over!"],
+    H.button [H.onClick ToggleEdit] [H.text "Toggle edit"],
     Story.view model.play.currentKey model.story
   ],
   Edit.view model.edit model.story

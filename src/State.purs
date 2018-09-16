@@ -17,8 +17,10 @@ type Model = {
   edit :: EditSettings
 }
 
+
 data Msg = Reset
          | StartLoad
+         | ToggleEdit
          | LoadComplete (Maybe Story)
          | DoNothing Unit
          | LogJSON
