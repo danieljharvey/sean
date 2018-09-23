@@ -7,12 +7,13 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "purescript-hedwig": "^0.1.0"
+    "purescript-hedwig": "^0.1.0",
+    "purty": "^3.0.6"
   },
   "scripts": {
-      "start": "pulp -w browserify --to index.js",
-      "serve": "serve -l 8000 -s ./",
-      "test": "pulp test",
-      "format": "./format.sh"
+    "start": "pulp -w browserify --to index.js",
+    "serve": "serve -l 8000 -s ./",
+    "test": "pulp test",
+    "format": "./format.sh"
   }
 }
