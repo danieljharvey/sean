@@ -1,39 +1,32 @@
 module App.Story where
 
 import Prelude
-import Data.Array (find, head, snoc, mapWithIndex)
+
+import Data.Array (findIndex, head, index, mapWithIndex, modifyAt, snoc)
 import Data.Either (hush)
-import Data.Maybe (Maybe(..), isJust)
+import Data.Maybe (Maybe(..), fromMaybe, isJust)
 import Data.String (length)
+import Data.Tuple (Tuple(..))
 import Simple.JSON (readJSON, writeJSON)
 import Type.Data.Boolean (kind Boolean)
 
-type Key = String
+type Key
+  = String
 
-type Link = {
-    text :: String,
-    key :: Key
-}
+type Index
+  = Int
 
-type Screen = {
-    key :: Key,
-    img :: Maybe String,
-    text :: String,
-    links :: Array Link
-}
+type Link
+  = {text :: String, key :: Key}
 
-type Story =
-  { title :: String
-  , screens :: Array Screen
-  }
+type Screen
+  = {key :: Key, img :: Maybe String, text :: String, links :: Array Link}
+
+type Story
+  = {title :: String, screens :: Array Screen}
 
 emptyScreen :: Screen
-emptyScreen = {
-    key: "",
-    img: Nothing,
-    text: "",
-    links: []
-}
+emptyScreen = {key: "", img: Nothing, text: "", links: []}
 
 parseStory :: String -> Maybe Story
 parseStory s = hush $ readJSON s
@@ -47,8 +40,15 @@ title s = s.title
 screens :: Story -> Array Screen
 screens s = s.screens
 
-findScreen :: Key -> Story -> Maybe Screen
-findScreen k s = find (\scr -> scr.key == k) s.screens
+type ScreenWithIndex
+  = Tuple Screen Int
+
+findScreen :: Key -> Story -> Maybe ScreenWithIndex
+findScreen k s = do
+    i <- findIndex (\scr ->
+      scr.key == k) s.screens
+    item <- index s.screens i
+    pure $ Tuple item i
 
 firstScreen :: Story -> Maybe Screen
 firstScreen s = head $ screens s
@@ -71,44 +71,68 @@ validateLink s l = isJust $ findScreen l.key s
 weirdValid :: Maybe Story -> Maybe Link -> Maybe Boolean
 weirdValid ms ml = validateLink <$> ms <*> ml
 
-updateKey :: Key -> Key -> Story -> Story
-updateKey oldKey newKey story = story { screens = newScreens }
-    where newScreens = map (\scr -> if scr.key == oldKey then scr { key = newKey } else scr) story.screens
+updateKey :: Index -> Key -> Story -> Story
+updateKey index newKey story = story {screens = newScreens}
+    where
+    newScreens = fromMaybe [] $ modifyAt index (\scr ->
+        scr {key = newKey}) story.screens
+    
 
-updateText :: Key -> String -> Story -> Story
-updateText oldKey newText story = story { screens = newScreens }
-    where newScreens = map (\scr -> if scr.key == oldKey then scr { text = newText } else scr) story.screens
+updateText :: Index -> String -> Story -> Story
+updateText index newText story = story {screens = newScreens}
+    where
+    newScreens = fromMaybe [] $ modifyAt index (\scr ->
+        scr {text = newText}) story.screens
+    
 
-updateImg :: Key -> String -> Story -> Story
-updateImg oldKey newImg story = story { screens = newScreens }
-    where newScreens = map (\scr -> if scr.key == oldKey then (putImageInScreen newImg scr) else scr) story.screens
+updateImg :: Index -> String -> Story -> Story
+updateImg index newImg story = story {screens = newScreens}
+    where
+    newScreens = fromMaybe [] $ modifyAt index (\scr ->
+        putImageInScreen newImg scr) story.screens
+    
 
 putImageInScreen :: String -> Screen -> Screen
 putImageInScreen newImg scr = case (length newImg > 0) of
-    true -> scr { img = Just newImg }
-    false -> scr { img = Nothing }
+    true -> scr {img = Just newImg}
+    false -> scr {img = Nothing}
 
-addEmptyLink :: Key -> Story -> Story
-addEmptyLink oldKey story = story { screens = newScreens }
-    where newScreens = map (\scr -> if scr.key == oldKey then scr { links = addEmptyLinkToArray scr.links } else scr) story.screens
+addEmptyLink :: Index -> Story -> Story
+addEmptyLink index story = story {screens = newScreens}
+    where
+    newScreens = fromMaybe [] $ modifyAt index (\scr ->
+        scr {links = addEmptyLinkToArray scr.links}) story.screens
+    
 
 addEmptyLinkToArray :: Array Link -> Array Link
-addEmptyLinkToArray linkArray = snoc linkArray { text: "", key: "" }
+addEmptyLinkToArray linkArray = snoc linkArray {text: "", key: ""}
 
-updateLinkKey :: Key -> Int -> String -> Story -> Story
-updateLinkKey oldKey index newLink story = story { screens = newScreens }
-    where newScreens = map (\scr -> if scr.key == oldKey then scr { links = updateLinkByKey index newLink scr.links } else scr) story.screens
+updateLinkKey :: Index -> Index -> String -> Story -> Story
+updateLinkKey screenIndex index newLink story = story {screens = newScreens}
+    where
+    newScreens = fromMaybe [] $ modifyAt screenIndex (\scr ->
+        scr {links = updateLinkByKey index newLink scr.links}) story.screens
+    
 
-updateLinkByKey :: Int -> String -> Array Link -> Array Link
-updateLinkByKey index newLink linkArray = mapWithIndex (\i -> \link -> if i == index then link { key = newLink } else link) linkArray
+updateLinkByKey :: Index -> String -> Array Link -> Array Link
+updateLinkByKey index newLink linkArray = mapWithIndex (\i ->
+    \link ->
+      if i == index then link {key = newLink} else link) linkArray
 
-updateLinkText:: Key -> Int -> String -> Story -> Story
-updateLinkText oldKey index newText story = story { screens = newScreens }
-    where newScreens = map (\scr -> if scr.key == oldKey then scr { links = updateLinkTextByKey index newText scr.links } else scr) story.screens
+updateLinkText :: Index -> Index -> String -> Story -> Story
+updateLinkText screenIndex index newText story = story {screens = newScreens}
+    where
+    newScreens = fromMaybe [] $ modifyAt screenIndex (\scr ->
+        scr {links = updateLinkTextByKey index newText scr.links}) story.screens
+    
 
-updateLinkTextByKey :: Int -> String -> Array Link -> Array Link
-updateLinkTextByKey index newText linkArray = mapWithIndex (\i -> \link -> if i == index then link { text = newText } else link) linkArray
+updateLinkTextByKey :: Index -> String -> Array Link -> Array Link
+updateLinkTextByKey index newText linkArray = mapWithIndex (\i ->
+    \link ->
+      if i == index then link {text = newText} else link) linkArray
 
 updateAddScreen :: Story -> Story
-updateAddScreen story = story { screens = newScreens }
-    where newScreens = story.screens <> [emptyScreen]
+updateAddScreen story = story {screens = newScreens}
+    where
+    newScreens = story.screens <> [emptyScreen]
+    
