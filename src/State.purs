@@ -1,33 +1,31 @@
 module App.State where
 
-import App.Story (Story, Key)
 import Prelude
+
+import App.Story (Key, Story)
 import Data.Maybe (Maybe)
 
-type EditSettings = {
-  editing :: Boolean,
-  currentKey :: Maybe Key
-}
+type EditSettings
+  = {editing :: Boolean, currentIndex :: Maybe Index}
 
-type Model = {
-  story :: Story,
-  play :: {
-    currentKey :: Key
-  },
-  edit :: EditSettings
-}
+type Model
+  = {story :: Story, play :: {currentKey :: Key}, edit :: EditSettings}
 
-data Msg = Reset
-         | StartLoad
-         | LoadComplete (Maybe Story)
-         | DoNothing Unit
-         | LogJSON
-         | ChangeScreen Key 
-         | ChangeEditScreen Key
-         | AddScreen
-         | EditKey Key Key
-         | EditText Key String
-         | EditImg Key String
-         | EditAddLink Key
-         | EditLinkKey Key Int String
-         | EditLinkText Key Int String
+type Index
+  = Int
+
+data Msg
+  = Reset
+  | StartLoad
+  | LoadComplete (Maybe Story)
+  | DoNothing Unit
+  | LogJSON
+  | ChangeScreen Key
+  | ChangeEditScreen Index
+  | AddScreen
+  | EditKey Index Key
+  | EditText Index String
+  | EditImg Index String
+  | EditAddLink Index
+  | EditLinkKey Index Int String
+  | EditLinkText Index Int String
