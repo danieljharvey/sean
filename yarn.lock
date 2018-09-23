@@ -30,10 +30,6 @@ purescript-hedwig@^0.1.0:
     snabbdom "^0.7.1"
     snabbdom-transition "^0.1.1"
 
-purty@^3.0.6:
-  version "3.0.6"
-  resolved "https://registry.yarnpkg.com/purty/-/purty-3.0.6.tgz#f93c096fa1df02cdd1452aa4dff7443b3a506bdc"
-
 querystring@0.2.0, querystring@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"

@@ -7,8 +7,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "purescript-hedwig": "^0.1.0",
-    "purty": "^3.0.6"
+    "purescript-hedwig": "^0.1.0"
   },
   "scripts": {
     "start": "pulp -w browserify --to index.js",
