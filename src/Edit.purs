@@ -6,7 +6,11 @@ import App.Story (Story, Screen, Link, findScreen)
 import Data.Array (elemIndex)
 import Data.Maybe (Maybe(..), isJust)
 
-getEditingScreen :: EditSettings -> Story -> Maybe Screen
+import Data.Tuple (Tuple)
+
+type ScreenWithIndex = Tuple Screen Int
+
+getEditingScreen :: EditSettings -> Story -> Maybe ScreenWithIndex
 getEditingScreen edit story = bind edit.currentKey (\key -> findScreen key story)
 
 isEditing :: EditSettings -> Screen -> Boolean

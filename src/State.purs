@@ -17,17 +17,19 @@ type Model = {
   edit :: EditSettings
 }
 
+type Index = Int
+
 data Msg = Reset
          | StartLoad
          | LoadComplete (Maybe Story)
          | DoNothing Unit
          | LogJSON
-         | ChangeScreen Key 
+         | ChangeScreen Key
          | ChangeEditScreen Key
          | AddScreen
-         | EditKey Key Key
-         | EditText Key String
-         | EditImg Key String
-         | EditAddLink Key
-         | EditLinkKey Key Int String
-         | EditLinkText Key Int String
+         | EditKey Index Key
+         | EditText Index String
+         | EditImg Index String
+         | EditAddLink Index
+         | EditLinkKey Index Int String
+         | EditLinkText Index Int String

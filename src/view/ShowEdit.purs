@@ -5,9 +5,10 @@ import Prelude
 import App.Edit (getEditingScreen, isEditing, linkIsValid)
 import App.OnTextAreaInput (onTextAreaInput)
 import App.State (EditSettings, Msg(..))
-import App.Story (Story, Screen, Link, Key)
+import App.Story (Link, Screen, Story)
 import Data.Array (mapWithIndex)
 import Data.Maybe (Maybe(..), fromMaybe)
+import Data.Tuple (Tuple(..))
 import Hedwig as H
 
 view :: EditSettings -> Story -> H.Html Msg
@@ -22,7 +23,7 @@ sideBar edit story = H.div [H.class' "sideBar"] [
     H.div [H.class' "screenList"] $ [screenList edit story],
     H.div [H.class' "screenForm"] $ [editForm]
 ] where editForm = case (getEditingScreen edit story) of 
-            Just scr -> screenForm story.screens scr
+            Just (Tuple scr i) -> screenForm story.screens scr i
             _        -> H.div [] [H.text "nothingness"]
 
 screenList :: EditSettings -> Story -> H.Html Msg
@@ -42,22 +43,22 @@ screen edit scr = H.div [
     ]
     where editingClass = if isEditing edit scr then "editingScreen" else "notEditingScreen"
 
-screenForm :: Array Screen -> Screen -> H.Html Msg
-screenForm screens scr = H.div [H.class' "form"] [
+screenForm :: Array Screen -> Screen -> Int -> H.Html Msg
+screenForm screens scr screenIndex = H.div [H.class' "form"] [
     H.div [] [
         H.label [H.for "key"] [H.text "Key:"],
         H.input [
             H.name "key",
             H.type' "text",
             H.value scr.key,
-            H.onInput $ EditKey scr.key
+            H.onInput $ EditKey screenIndex
         ] []
     ],
     H.div [] [
         H.label [H.for "text"] [H.text "Text:"],
         H.textarea [
             H.name "text",
-            onTextAreaInput $ EditText scr.key
+            onTextAreaInput $ EditText screenIndex
         ] [H.text scr.text]
     ],
     H.div [] [
@@ -65,29 +66,33 @@ screenForm screens scr = H.div [H.class' "form"] [
         H.input [
             H.name "img",
             H.value $ fromMaybe "" scr.img,
-            H.onInput $ EditImg scr.key
+            H.onInput $ EditImg screenIndex
         ] []
     ],
     H.div [] [
         H.label [H.for "links"] [H.text "Links:"],
-        H.div [H.class' "links"] $ mapWithIndex (screenLink screens scr.key) scr.links,
-        H.button [H.onClick $ EditAddLink scr.key] [H.text "Add new link"]
+        H.div [H.class' "links"] $ mapWithIndex (screenLink screens screenIndex) scr.links,
+        H.button [H.onClick $ EditAddLink screenIndex] [H.text "Add new link"]
     ]
 ]
 
-screenLink :: Array Screen -> Key ->  Int ->  Link -> H.Html Msg
-screenLink screens key index link = H.div [H.class' "screenLink", H.class' "showCircle", H.class' linkClass] [
+screenLink :: Array Screen -> Int -> Int -> Link -> H.Html Msg
+screenLink screens screenIndex linkIndex link = H.div [
+        H.class' "screenLink",
+        H.class' "showCircle",
+        H.class' linkClass
+    ] [
     H.text "Link to:",
     H.input [
         H.type' "text",
         H.value link.key,
-        H.onInput $ EditLinkKey key index 
+        H.onInput $ EditLinkKey screenIndex linkIndex 
     ] [],
         H.text "Text:",
     H.input [
         H.type' "text",
         H.value link.text,
-        H.onInput $ EditLinkText key index 
+        H.onInput $ EditLinkText screenIndex linkIndex 
     ] []
 ]
     where linkClass = if (linkIsValid screens link) then "validLink" else "invalidLink"

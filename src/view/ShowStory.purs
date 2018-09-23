@@ -5,13 +5,14 @@ import App.State (Msg(..))
 import App.Story (Key, Screen, Story, Link, findScreen, validateLink)
 import Control.Monad.Reader (Reader, ask, runReader)
 import Data.Maybe (fromMaybe)
+import Data.Tuple (fst)
 import Hedwig as H
 
 view :: Key -> Story -> H.Html Msg
 view key story = runReader (renderStory key story) story
 
 renderStory :: Key -> Story -> Reader Story (H.Html Msg)
-renderStory key story = fromMaybe errorScreen $ map renderScreen (findScreen key story)
+renderStory key story = fromMaybe errorScreen $ map (renderScreen <<< fst) (findScreen key story)
 
 errorScreen :: Reader Story (H.Html Msg)
 errorScreen = pure $ H.div [] [H.text "Error - could not find screen"]

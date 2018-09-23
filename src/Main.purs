@@ -62,24 +62,24 @@ update model msg = case msg of
   ChangeScreen newKey -> model { play = model.play { currentKey = newKey } } :> []
   ChangeEditScreen newKey -> model { edit = model.edit { currentKey = Just newKey } } :> []
   AddScreen -> model { story = updateAddScreen model.story } :> []
-  EditKey oldKey newKey -> model { 
+  EditKey screenIndex newKey -> model { 
     edit = model.edit { currentKey = Just newKey }, 
-    story = updateKey oldKey newKey model.story
+    story = updateKey screenIndex newKey model.story
   } :> []
-  EditText oldKey newText -> model {
-    story = updateText oldKey newText model.story
+  EditText screenIndex newText -> model {
+    story = updateText screenIndex newText model.story
   } :> []
-  EditImg oldKey newImg -> model {
-    story = updateImg oldKey newImg model.story
+  EditImg screenIndex newImg -> model {
+    story = updateImg screenIndex newImg model.story
   } :> []
-  EditAddLink oldKey -> model {
-    story = addEmptyLink oldKey model.story
+  EditAddLink screenIndex -> model {
+    story = addEmptyLink screenIndex model.story
   } :> []
-  EditLinkKey oldKey index newLink -> model {
-    story = updateLinkKey oldKey index newLink model.story
+  EditLinkKey screenIndex index newLink -> model {
+    story = updateLinkKey screenIndex index newLink model.story
   } :> []
-  EditLinkText oldKey index newText -> model {
-    story = updateLinkText oldKey index newText model.story
+  EditLinkText screenIndex index newText -> model {
+    story = updateLinkText screenIndex index newText model.story
   } :> []
 
 view :: Model -> H.Html Msg
