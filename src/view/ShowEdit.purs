@@ -11,6 +11,8 @@ import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Tuple (Tuple(..))
 import Hedwig as H
 
+type Index = Int
+
 view :: EditSettings -> Story -> H.Html Msg
 view edit story = case edit.editing of 
     false -> H.div [] []
@@ -30,18 +32,18 @@ screenList :: EditSettings -> Story -> H.Html Msg
 screenList edit story = H.div [] [
     H.p [] [H.text "Screens"],
     H.button [H.onClick AddScreen] [H.text "Add screen"],
-    H.div [] $ map (screen edit) story.screens
+    H.div [] $ mapWithIndex (screen edit) story.screens
 ]
 
-screen :: EditSettings -> Screen -> H.Html Msg
-screen edit scr = H.div [
-        H.onClick $ ChangeEditScreen scr.key,
+screen :: EditSettings -> Index -> Screen -> H.Html Msg
+screen edit screenIndex scr = H.div [
+        H.onClick $ ChangeEditScreen screenIndex,
         H.class' editingClass,
         H.class' "showCircle" 
     ] [
         H.text $ scr.key <> " - " <> scr.text
     ]
-    where editingClass = if isEditing edit scr then "editingScreen" else "notEditingScreen"
+    where editingClass = if isEditing edit $ Tuple scr screenIndex then "editingScreen" else "notEditingScreen"
 
 screenForm :: Array Screen -> Screen -> Int -> H.Html Msg
 screenForm screens scr screenIndex = H.div [H.class' "form"] [

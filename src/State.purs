@@ -6,7 +6,7 @@ import Data.Maybe (Maybe)
 
 type EditSettings = {
   editing :: Boolean,
-  currentKey :: Maybe Key
+  currentIndex :: Maybe Index
 }
 
 type Model = {
@@ -25,7 +25,7 @@ data Msg = Reset
          | DoNothing Unit
          | LogJSON
          | ChangeScreen Key
-         | ChangeEditScreen Key
+         | ChangeEditScreen Index
          | AddScreen
          | EditKey Index Key
          | EditText Index String

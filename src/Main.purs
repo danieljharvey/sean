@@ -33,7 +33,7 @@ init = {
   },
   edit : {
     editing : true,
-    currentKey : Just "start"
+    currentIndex: Nothing
   }
 }
 
@@ -60,10 +60,9 @@ update model msg = case msg of
   StartLoad -> model :> [LoadComplete <$> loadStory]
   LoadComplete a -> model { story = fromMaybe model.story a } :> []
   ChangeScreen newKey -> model { play = model.play { currentKey = newKey } } :> []
-  ChangeEditScreen newKey -> model { edit = model.edit { currentKey = Just newKey } } :> []
+  ChangeEditScreen index -> model { edit = model.edit { currentIndex = Just index } } :> []
   AddScreen -> model { story = updateAddScreen model.story } :> []
   EditKey screenIndex newKey -> model { 
-    edit = model.edit { currentKey = Just newKey }, 
     story = updateKey screenIndex newKey model.story
   } :> []
   EditText screenIndex newText -> model {
