@@ -1,5 +1,6 @@
 module Main where
 
+import App.Edit
 import Prelude
 
 import App.State (Model, Msg(..))
@@ -14,7 +15,19 @@ import App.Story ( Story
                  , updateText
                  , writeStory
                  )
+import App.Story ( Story
+                 , addEmptyLink
+                 , parseStory
+                 , updateAddScreen
+                 , updateImg
+                 , updateKey
+                 , updateLinkKey
+                 , updateLinkText
+                 , updateText
+                 , writeStory
+                 )
 import Data.Either (hush)
+import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Effect (Effect)
 import Effect.Aff (Aff)
@@ -23,6 +36,8 @@ import Hedwig ((:>))
 import Simple.JSON (readJSON)
 
 import App.View.Edit as Edit
+import App.View.Edit as Edit
+import App.View.Story as Story
 import App.View.Story as Story
 import Data.Argonaut.Core as J
 import Hedwig as H
@@ -35,7 +50,7 @@ initStory = {title: "test", screens: []}
 init :: Model
 init = { story: initStory
        , play: {currentKey: "start"}
-       , edit: {editing: true, currentIndex: Nothing}
+       , edit: {editing: false, currentIndex: Nothing}
        }
 
 type StoryJson
@@ -58,6 +73,7 @@ update model msg = case msg of
                    } :> []
     DoNothing unit -> model :> []
     LogJSON -> model :> [DoNothing <$> H.sync (log $ writeStory model.story)]
+    ToggleEdit -> model {edit = toggleEdit model.edit} :> []
     StartLoad -> model :> [LoadComplete <$> loadStory]
     LoadComplete a -> model {story = fromMaybe model.story a} :> []
     ChangeScreen newKey -> model {play = model.play {currentKey = newKey}} :> []
@@ -83,6 +99,8 @@ view model = H.main [ H.id "main"
                     ] [ H.div [ H.class' "play"
                               ] [ H.button [ H.onClick Reset
                                            ] [H.text "Start over!"]
+                                , H.button [ H.onClick ToggleEdit
+                                           ] [H.text "Toggle edit"]
                                 , Story.view model.play.currentKey model.story
                                 ]
                       , Edit.view model.edit model.story

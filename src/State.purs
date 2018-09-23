@@ -17,6 +17,7 @@ type Index
 data Msg
   = Reset
   | StartLoad
+  | ToggleEdit
   | LoadComplete (Maybe Story)
   | DoNothing Unit
   | LogJSON

@@ -2,20 +2,333 @@
   "title": "Test",
   "screens": [
     {
-      "text": "Good morning Sean.",
+      "text": "Good morning Sean. It's a delicious morning. What are you going to do first?",
       "links": [
         { "text": "Go to the toilet", "key": "toilet" },
-        { "text": "Go to the small claims court", "key": "small-claims-court" },
+        {
+          "text": "Go to the small claims court",
+          "key": "small-claims-court-1"
+        },
         { "text": "Eat some Special K", "key": "special-k" }
       ],
       "key": "start",
-      "img": "http://onwardolympians.com/seans-big-day/images/start.jpg"
+      "img": "static/images/start.jpg"
     },
-    { "text": "It is the toilet", "links": [], "key": "toilet" },
     {
-      "text": "There were horses, oh yes, there were certainly horses",
-      "links": [],
-      "key": "Toes"
+      "text": "Ahh. The toilet. So many memories. No time for toilet activities now though.",
+      "links": [
+        { "text": "Check the mirror", "key": "mirror" },
+        { "text": "Leave the toilet", "key": "start" }
+      ],
+      "key": "toilet",
+      "img": "static/images/toilet.jpg"
+    },
+    {
+      "text": "There he is.",
+      "links": [
+        { "text": "Leave the toilet", "key": "small-claims-court-1" },
+        {
+          "text": "Stare in to your own mesmerising eyes",
+          "key": "seans-brain"
+        }
+      ],
+      "key": "mirror",
+      "img": "static/images/mirror.jpg"
+    },
+    {
+      "text": "Delicious. What a great way to start the day.",
+      "links": [
+        {
+          "text": "This is all very well but I am going to need the toilet now.",
+          "key": "toilet"
+        }
+      ],
+      "key": "special-k",
+      "img": "static/images/special-k.jpg"
+    },
+    {
+      "text": "It's filthy in here. You should really clean it, shouldn't you?",
+      "links": [
+        {
+          "text": "No way, it's my brain and I can do what I want with it",
+          "key": "toilet"
+        },
+        {
+          "text": "Yes, you are right. You are always right",
+          "key": "cleaning-cupboard"
+        }
+      ],
+      "key": "seans-brain",
+      "img": "static/images/seans-brain.jpg"
+    },
+    {
+      "text": "What's the matter, Sean? Haven't you ever cleaned a brain before? You know what to use don't you?",
+      "links": [
+        { "text": "Toothpick", "key": "unconscious" },
+        { "text": "Bleach-soaked rag", "key": "unconscious" },
+        { "text": "Cannabis", "key": "unconscious" },
+        { "text": "Jet hose", "key": "bathroom-sink" }
+      ],
+      "key": "cleaning-cupboard",
+      "img": "static/images/cleaning-cupboard.jpg"
+    },
+    {
+      "text": "That looked like it was painful. Do you feel better now?",
+      "links": [
+        {
+          "text": "Yes, that washed away all of the nerves and I am ready for the small claims court",
+          "key": "small-claims-court-1"
+        },
+        {
+          "text": "No. Is my nose ok? I need to check my face in the mirror",
+          "key": "mirror"
+        }
+      ],
+      "key": "bathroom-sink",
+      "img": "static/images/bathroom-sink.jpg"
+    },
+    {
+      "text": "WAKE UP SEAN. You have been laying on the bathroom floor of the small claims court for days now... Is that smell coming from your trousers?",
+      "links": [
+        {
+          "text": "Deny everything and resume your day",
+          "key": "small-claims-court-1"
+        },
+        {
+          "text": "Run home for a quick wash and a bowl of Special K",
+          "key": "special-k"
+        }
+      ],
+      "key": "unconscious",
+      "img": "static/images/unconscious.jpg"
+    },
+    {
+      "text": "Ahh. The Small Claims Court. So many memories. You really showed them all didn't you?",
+      "links": [
+        { "text": "Yes, I certainly showed them", "key": "yes-i-showed-them" },
+        {
+          "text": "No, sadly I did not show them",
+          "key": "i-did-not-show-them"
+        }
+      ],
+      "key": "small-claims-court-1",
+      "img": "static/images/small-claims-court.jpg"
+    },
+    {
+      "text": "Oh yes. Absolutely.",
+      "links": [{ "text": "Think about victories", "key": "victory-1" }],
+      "key": "yes-i-showed-them",
+      "img": "static/images/yes-i-showed-them.jpg"
+    },
+    {
+      "text": "No. Sadly not.",
+      "links": [
+        {
+          "text": "Steve was probably right when he said I would amount to nothing",
+          "key": "small-claims-court-2"
+        }
+      ],
+      "key": "i-did-not-show-them",
+      "img": "static/images/i-did-not-show-them.jpg"
+    },
+    {
+      "text": "Crushing this man and his stupid shoes patent was a powerful and fulfilling moment.",
+      "links": [
+        { "text": "Think about further victories.", "key": "victory-2" },
+        { "text": "That's quite enough.", "key": "victory-2" }
+      ],
+      "key": "victory-1",
+      "img": "static/images/victory-1.jpg"
+    },
+    {
+      "text": "Humiliating this ridiculous baby was a rewarding day and a reminder to the other people in this town that you are certainly not the walkover that Steve said you were.",
+      "links": [
+        { "text": "Think about crushing Steve", "key": "victory-3" },
+        { "text": "Don't think about Steve", "key": "victory-3" }
+      ],
+      "key": "victory-2",
+      "img": "static/images/victory-2.jpg"
+    },
+    {
+      "text": "Look at him there, laughing at some stupid joke about trout no doubt. What I wouldn't give to choke that big jolly neck with some fishing line and no mistake. Stupid Steve.",
+      "links": [
+        {
+          "text": "Actually I just remembered that I really like Special K",
+          "key": "special-k"
+        },
+        {
+          "text": "Remember that you are in court",
+          "key": "small-claims-court-2"
+        }
+      ],
+      "key": "victory-3",
+      "img": "static/images/victory-3.jpg"
+    },
+    {
+      "text": "It's probably time you proceeded with today's big case.",
+      "links": [
+        {
+          "text": "No thanks, I am scared of law and would rather go home and eat some Special K",
+          "key": "special-k"
+        },
+        { "text": "Let's crack this case", "key": "case-home" }
+      ],
+      "key": "small-claims-court-2",
+      "img": "static/images/small-claims-court-2.jpg"
+    },
+    {
+      "text": "Hold on. What are you even doing here? What is your job?",
+      "links": [
+        { "text": "Sort of janitor I guess", "key": "janitor-0" },
+        { "text": "Important big shot lawyer", "key": "lawyer-0" }
+      ],
+      "key": "case-home",
+      "img": "static/images/case-1.jpg"
+    },
+    {
+      "text": "Excellent news. The work of a janitor is very important, if somewhat underrated. There are many rats in this small claims court that will require careful yet violent bonking.",
+      "links": [
+        { "text": "I agree, these rats are a scourge", "key": "janitor-1" },
+        { "text": "Actually I wish I was a big shot lawyer", "key": "lawyer-0" }
+      ],
+      "key": "janitor-0"
+    },
+    {
+      "text": "The worst of the rats of course is the King Rat. Finding him will require your most maximum tracking skills and assuring his enduring destruction will require you to summon a most violent bonking indeed.",
+      "links": [
+        { "text": "How do I know which rat is the king?", "key": "king-rat" },
+        {
+          "text": "I am not scared of bonking the King Rat",
+          "key": "janitor-2"
+        },
+        {
+          "text": "I am reasonably scared, especially regarding this aforementioned bonking",
+          "key": "janitor-3"
+        }
+      ],
+      "key": "janitor-1",
+      "img": "static/images/case-2-1.jpg"
+    },
+    {
+      "text": "The king rat is a hard rat to find. He looks like almost any other rat, but if you part the fur on top of his head you will find a tiny crown. The king rat can also be recognised by his exremely white teeth. Whilst other rats mouths usually turn down at the corners, the king rat has a small but smug smile. ",
+      "links": [
+        {
+          "text": "Ok, I got it. I'm ready to hunt the rat.",
+          "key": "janitor-2"
+        }
+      ],
+      "key": "king-rat",
+      "img": "static/images/king-rat.jpg"
+    },
+    {
+      "text": "Excellent news. The King Rat can smell fear, and the removal of smells is very much a key part of your job as janitor. Which tool will you use to find King Rat?",
+      "links": [
+        { "text": "Choose map", "key": "janitor-4" },
+        { "text": "Choose bag of teeth", "key": "janitor-4" },
+        { "text": "Choose bananagrams", "key": "janitor-4" },
+        { "text": "Choose dog kennel", "key": "janitor-4" },
+        { "text": "Choose broom", "key": "janitor-4" }
+      ],
+      "key": "janitor-2",
+      "img": "static/images/case-2-2.jpg"
+    },
+    {
+      "text": "Not to worry. You have many tools at your disposal. Which will you take?",
+      "links": [
+        { "text": "Choose broom", "key": "janitor-4" },
+        { "text": "Choose mop", "key": "janitor-4" },
+        { "text": "Choose sword", "key": "janitor-4" },
+        { "text": "Choose axe", "key": "janitor-4" },
+        { "text": "Choose metal detector", "key": "janitor-5" }
+      ],
+      "key": "janitor-3",
+      "img": "static/images/case-2-3.jpg"
+    },
+    {
+      "text": "You have chosen the broom.",
+      "links": [{ "text": "Excellent", "key": "janitor-6" }],
+      "key": "janitor-4",
+      "img": "static/images/case-2-4.jpg"
+    },
+    {
+      "text": "Unfortunately, the King Rat does not contain any metal, so this will be of no use.",
+      "links": [
+        { "text": "That is a remarkably good point", "key": "janitor-6" }
+      ],
+      "key": "janitor-5",
+      "img": "static/images/case-2-5.jpg"
+    },
+    {
+      "text": "You practice using the broom.\n\nBroom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom. Broom.",
+      "links": [
+        { "text": "I am now comfortable with the broom", "key": "janitor-7" },
+        { "text": "More broom practicing please", "key": "janitor-6" }
+      ],
+      "key": "janitor-6",
+      "img": "static/images/case-2-6.jpg"
+    },
+    {
+      "text": "Time to find rats.",
+      "links": [
+        { "text": "Look under the stairs", "key": "janitor-8" },
+        { "text": "Inspect the gavel", "key": "janitor-9" },
+        { "text": "Ask the judge some questions", "key": "janitor-a-0" },
+        {
+          "text": "This is honestly the worst. I wish I was an important lawyer that does not have to concern himself with the hunting and bonking of rats",
+          "key": "janitor-b-0"
+        }
+      ],
+      "key": "janitor-7"
+    },
+    {
+      "text": "There are no rats under the stairs.",
+      "links": [{ "text": "Damn.", "key": "janitor-7" }],
+      "key": "janitor-8",
+      "img": "static/images/case-2-8.jpg"
+    },
+    {
+      "text": "There are no rats under the gavel, which as it turns out is a wooden hammer for flattening tables.",
+      "links": [{ "text": "Interesting.", "key": "janitor-7" }],
+      "key": "janitor-9",
+      "img": "static/images/case-2-9.jpg"
+    },
+    {
+      "text": "The judge is very old and his face looks like a farty glove. What do you ask him?",
+      "links": [
+        {
+          "text": "Are you really old? You look old to me.",
+          "key": "janitor-a-a"
+        },
+        { "text": "Is that your real face?", "key": "janitor-a-b" },
+        {
+          "text": "You must see a lot of crimes. Have you ever thought about committing the perfect crime? How would you do it?",
+          "key": "janitor-a-c"
+        },
+        {
+          "text": "Have you seen the King Rat anywhere around here?",
+          "key": "janitor-b-0"
+        },
+        { "text": "Threaten judge with gavel", "key": "toilet-2" }
+      ],
+      "key": "janitor-a-0",
+      "img": "static/images/case-2-10.jpg"
+    },
+    {
+      "text": "\"I am in fact remarkably young for a judge in my senior position, however I have been prematurely aged by years of listening to pertinent details of the most terrible crimes that human people could possibly do to one another.\"",
+      "links": [
+        { "text": "Ask more questions", "key": "janitor-a-0" },
+        { "text": "Leave the judge alone", "key": "janitor-7" }
+      ],
+      "key": "janitor-a-a",
+      "img": "static/images/case-2-10a-case-2-10c6.jpg"
+    },
+    {
+      "text": "\"No. This is a glove. But I have been told that my real face is also very similar in texture and hue to that of a brown driving glove.\"",
+      "links": [
+        { "text": "Ask more questions", "key": "janitor-a-0" },
+        { "text": "Leave the judge alone", "key": "janitor-7" }
+      ],
+      "key": "janitor-a-b"
     }
   ]
 }

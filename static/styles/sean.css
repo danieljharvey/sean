@@ -19,6 +19,15 @@ body {
   margin: 20px;
 }
 
+.story .storyLink {
+  text-decoration: underline;
+  margin: 10px;
+}
+
+.story .activeStoryLink {
+  font-weight: bold;
+}
+
 .play {
   padding: 10px;
   background-color: #eeeeee;
@@ -28,8 +37,9 @@ body {
   height: 100%;
 }
 
-.play img {
+.play img.storyImage {
   mix-blend-mode: multiply;
+  max-width: 80%;
 }
 
 .sideBar {
@@ -46,12 +56,14 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 }
 
 .screenForm {
   border-top: 1px #aaa solid;
   padding: 10px;
   flex: 1;
+  overflow-y: scroll;
 }
 
 .screenForm .form label {
@@ -61,6 +73,15 @@ body {
 .screenForm .form input,
 .screenForm .form textarea {
   margin: 10px;
+}
+
+.screenForm .form textarea {
+  width: 90%;
+  min-height: 300px;
+}
+
+.screenForm .form input {
+  width: 30%;
 }
 
 .screenForm .links {
