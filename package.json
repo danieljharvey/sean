@@ -11,6 +11,7 @@
   },
   "scripts": {
       "start": "pulp -w browserify --to index.js",
-      "serve": "serve -l 8000 -s ./"
+      "serve": "serve -l 8000 -s ./",
+      "test": "pulp test"
   }
 }
