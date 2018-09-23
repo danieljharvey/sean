@@ -1,13 +1,20 @@
 module Main where
 
+import App.Edit
 import Prelude
 
 import App.State (Model, Msg(..))
-import App.Story (Story, updateKey, updateText, updateImg, addEmptyLink, updateLinkKey, updateLinkText, writeStory, parseStory, updateAddScreen)
-import App.Edit
-import App.View.Story as Story
-import App.View.Edit as Edit
-import Data.Maybe (Maybe(..), fromMaybe)
+import App.Story ( Story
+                 , addEmptyLink
+                 , parseStory
+                 , updateAddScreen
+                 , updateImg
+                 , updateKey
+                 , updateLinkKey
+                 , updateLinkText
+                 , updateText
+                 , writeStory
+                 )
 import App.Story ( Story
                  , addEmptyLink
                  , parseStory
@@ -21,6 +28,7 @@ import App.Story ( Story
                  )
 import Data.Either (hush)
 import Data.Maybe (Maybe(..), fromMaybe)
+import Data.Maybe (Maybe(..), fromMaybe)
 import Effect (Effect)
 import Effect.Aff (Aff)
 import Effect.Console (log)
@@ -28,6 +36,8 @@ import Hedwig ((:>))
 import Simple.JSON (readJSON)
 
 import App.View.Edit as Edit
+import App.View.Edit as Edit
+import App.View.Story as Story
 import App.View.Story as Story
 import Data.Argonaut.Core as J
 import Hedwig as H
@@ -59,12 +69,11 @@ decodeStoryJson s = hush $ readJSON s
 
 update :: H.Update Model Msg
 update model msg = case msg of
-
     Reset -> model { play = init.play
                    } :> []
     DoNothing unit -> model :> []
     LogJSON -> model :> [DoNothing <$> H.sync (log $ writeStory model.story)]
-    ToggleEdit -> model { edit = toggleEdit model.edit } :> []
+    ToggleEdit -> model {edit = toggleEdit model.edit} :> []
     StartLoad -> model :> [LoadComplete <$> loadStory]
     LoadComplete a -> model {story = fromMaybe model.story a} :> []
     ChangeScreen newKey -> model {play = model.play {currentKey = newKey}} :> []
@@ -86,14 +95,17 @@ update model msg = case msg of
                                                     } :> []
 
 view :: Model -> H.Html Msg
-view model = H.main [H.id "main"] [
-  H.div [H.class' "play"] [
-    H.button [H.onClick Reset] [H.text "Start over!"],
-    H.button [H.onClick ToggleEdit] [H.text "Toggle edit"],
-    Story.view model.play.currentKey model.story
-  ],
-  Edit.view model.edit model.story
-]
+view model = H.main [ H.id "main"
+                    ] [ H.div [ H.class' "play"
+                              ] [ H.button [ H.onClick Reset
+                                           ] [H.text "Start over!"]
+                                , H.button [ H.onClick ToggleEdit
+                                           ] [H.text "Toggle edit"]
+                                , Story.view model.play.currentKey model.story
+                                ]
+                      , Edit.view model.edit model.story
+                      ]
+
 main :: Effect Unit
 main = do
     H.mount "main" { init: init :> [pure StartLoad]

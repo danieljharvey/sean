@@ -25,6 +25,7 @@ linkIsValid screens link = isJust $ elemIndex link.key screenKeys
     where
     screenKeys = map (\t ->
         t.key) screens
+    
 
 toggleEdit :: EditSettings -> EditSettings
-toggleEdit edit = edit { editing = (not edit.editing) }
+toggleEdit edit = edit {editing = (not edit.editing)}
