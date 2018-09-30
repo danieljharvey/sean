@@ -33,7 +33,7 @@ type StoryJson
   = {json :: String}
 
 endpoint :: String
-endpoint = "http://localhost:8000/"
+endpoint = "/"
 
 loadStory :: Aff (Maybe Story)
 loadStory = do
