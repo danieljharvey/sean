@@ -1,7 +1,7 @@
 module Main where
 
-import App.Edit
-import Prelude
+import App.Edit (toggleEdit)
+import Prelude (Unit, bind, pure, ($), (<$>), (<>))
 
 import App.State (Model, Msg(..))
 import App.Story ( Story
@@ -15,19 +15,7 @@ import App.Story ( Story
                  , updateText
                  , writeStory
                  )
-import App.Story ( Story
-                 , addEmptyLink
-                 , parseStory
-                 , updateAddScreen
-                 , updateImg
-                 , updateKey
-                 , updateLinkKey
-                 , updateLinkText
-                 , updateText
-                 , writeStory
-                 )
 import Data.Either (hush)
-import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Effect (Effect)
 import Effect.Aff (Aff)
@@ -36,8 +24,6 @@ import Hedwig ((:>))
 import Simple.JSON (readJSON)
 
 import App.View.Edit as Edit
-import App.View.Edit as Edit
-import App.View.Story as Story
 import App.View.Story as Story
 import Data.Argonaut.Core as J
 import Hedwig as H
@@ -57,7 +43,7 @@ type StoryJson
   = {json :: String}
 
 endpoint :: String
-endpoint = "http://localhost:8000/"
+endpoint = "/"
 
 loadStory :: Aff (Maybe Story)
 loadStory = do
