@@ -14,6 +14,15 @@ type Model
 type Index
   = Int
 
+data EditMsg = ChangeEditScreen Index
+  | AddScreen
+  | EditKey Index Key
+  | EditText Index String
+  | EditImg Index String
+  | EditAddLink Index
+  | EditLinkKey Index Int String
+  | EditLinkText Index Int String
+
 data Msg
   = Reset
   | StartLoad
@@ -22,11 +31,4 @@ data Msg
   | DoNothing Unit
   | LogJSON
   | ChangeScreen Key
-  | ChangeEditScreen Index
-  | AddScreen
-  | EditKey Index Key
-  | EditText Index String
-  | EditImg Index String
-  | EditAddLink Index
-  | EditLinkKey Index Int String
-  | EditLinkText Index Int String
+  | EditAction EditMsg
