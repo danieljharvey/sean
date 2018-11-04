@@ -6,9 +6,10 @@ Sean's Big Day is a choose your own adventure. This is an engine for playing / e
 git clone https://github.com/danieljharvey/sean
 cd sean
 psc-package install
-yarn install
 
-pulp browserify --to index.js
-
-open index.html
+# each of these need to run simultaneously...
+# this...
+yarn start
+# and this...
+yarn serve
 ```
