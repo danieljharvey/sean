@@ -24,6 +24,7 @@ sideBar :: EditSettings -> Story -> H.Html Msg
 sideBar edit story = H.div [ H.class' "sideBar"
                            ] [ H.button [H.onClick StartLoad] [H.text "LOAD"]
                              , H.button [H.onClick LogJSON] [H.text "LOG"]
+                             , H.button [H.onClick StartSave] [H.text "SAVE"]
                              , H.div [ H.class' "screenList"
                                      ] $ [screenList edit story]
                              , H.div [H.class' "screenForm"] $ [editForm]
