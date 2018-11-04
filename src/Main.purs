@@ -1,7 +1,7 @@
 module Main where
 
-import Effect
-import Effect.Class
+import Effect (Effect)
+import Effect.Class (liftEffect)
 import Prelude
 
 import App.Edit (toggleEdit, editUpdate)
