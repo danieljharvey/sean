@@ -25,11 +25,22 @@ type Screen
 type Story
   = {title :: String, screens :: Array Screen}
 
+type StoryJson
+  = { json :: String }
+
 emptyScreen :: Screen
 emptyScreen = {key: "", img: Nothing, text: "", links: []}
 
 parseStory :: String -> Maybe Story
 parseStory s = hush $ readJSON s
+
+parseJsonStory :: String -> Maybe StoryJson
+parseJsonStory s = hush $ readJSON s
+
+parseStoryWithJson :: String -> Maybe Story
+parseStoryWithJson s = do 
+    storyJson <- parseJsonStory s
+    parseStory $ storyJson.json
 
 writeStory :: Story -> String
 writeStory = writeJSON

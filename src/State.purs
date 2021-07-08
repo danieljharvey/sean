@@ -26,8 +26,9 @@ data EditMsg = ChangeEditScreen Index
 data Msg
   = Reset
   | StartLoad
-  | ToggleEdit
   | LoadComplete (Maybe Story)
+  | StartSave
+  | ToggleEdit
   | DoNothing Unit
   | LogJSON
   | ChangeScreen Key
